@@ -2,7 +2,8 @@ package gsb;
 
 import java.sql.*;
 
-public class sgdb {
+public class sgdb 
+{
 
     public static void utiliserSgdb(String laRequete, boolean doitAfficherResultat) 
     {
