@@ -1,4 +1,4 @@
-package gsb;
+package gsb.utils;
 
 import java.sql.*;
 
