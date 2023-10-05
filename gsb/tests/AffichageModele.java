@@ -1,6 +1,6 @@
-package gsb;
+package gsb.tests;
 
-public class app 
+public class AffichageModele 
 {
     public static void main(String[] args) 
     {
