@@ -1,12 +1,13 @@
-package gsb;
+package gsb.utils;
 
 import java.sql.*;
 
-public class sgdb {
+public class sgdb 
+{
 
     public static void utiliserSgdb(String laRequete, boolean doitAfficherResultat) 
     {
-        String url = "jdbc:mysql://127.0.0.1:8889/gsbV2";
+        String url = "jdbc:mysql://127.0.0.1:3306/";
         String user = "root";
         String password = "password";
         Connection con = null;
