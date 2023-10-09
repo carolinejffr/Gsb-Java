@@ -8,10 +8,11 @@ public class AffichageModele
     public static void main(String[] args) 
     {
         System.out.println("Bienvenue dans l'application GSB Java.");
-        myFrame frame = new myFrame();
-        // System.out.println("-----------------------------------");
-        // System.out.println("Test de connexion :");
-        // sgdb.utiliserSgdb("SELECT * FROM gsbv2.LOCALITE", true);
+        //myFrame frame = new myFrame();
+        System.out.println("-----------------------------------");
+        System.out.println("Test de connexion :");
+        System.out.println(sgdb.retournerString("SELECT VILLE FROM gsbv2.LOCALITE WHERE CODEPOSTAL = 75011"));
+        //sgdb.utiliserSgdb("SELECT * FROM gsbv2.LOCALITE", true);
         // sgdb.utiliserSgdb("SELECT * FROM gsbv2.MEDECIN", true);
         // sgdb.utiliserSgdb("SELECT * FROM gsbv2.MEDICAMENT", true);
         // sgdb.utiliserSgdb("SELECT * FROM gsbv2.VISITE", true);

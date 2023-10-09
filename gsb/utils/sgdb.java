@@ -56,4 +56,55 @@ public class sgdb
             }
         }
     }
+
+    public static String retournerString(String laRequete)
+    {
+        String url = "jdbc:mysql://127.0.0.1:8889/";
+        String user = "root";
+        String password = "password";
+        Connection con = null;
+        Statement requete = null;
+        String laDonnee = null;
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            con = DriverManager.getConnection(url,user,password);
+
+            requete = con.createStatement();
+
+            ResultSet resultat = requete.executeQuery(laRequete);
+            while (resultat.next()) 
+            {
+                laDonnee = resultat.getString(1);
+            };// fin while
+            
+        }
+        catch(Exception e) 
+        {
+
+        System.out.println("Echec SGDB");
+
+        e.printStackTrace();
+
+        }
+        finally
+        {
+            try
+            {
+                con.close();
+                requete.close();
+            }
+            catch(Exception e) 
+            {
+                e.printStackTrace();
+            }
+        }
+
+        if (laDonnee == null)
+        {
+            System.out.println("ERREUR : votre requête ne retourne pas de donnée.");
+        }
+        return laDonnee;
+    }
 }
