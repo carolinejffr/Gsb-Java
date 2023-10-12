@@ -2,8 +2,22 @@ package gsb.modele;
 
 public class Visiteur 
 {
+    
+    protected String matricule;
+    protected String nom;
+    protected String prenom;
+    protected String login;
+    protected String mdp;
+    protected String adresse;
+    protected Localite uneLocalite;
+    protected String telephone;
+    protected String dateEntree;
+    protected int prime;
+    protected String codeUnite;
+    protected String nomUnite;
+
     public Visiteur(String matricule, String nom, String prenom, String login, String mdp, String adresse,
-            Localite uneLocalite, String telephone, Date dateEntree, int prime, String codeUnite, String nomUnite) 
+            Localite uneLocalite, String telephone, String dateEntree, int prime, String codeUnite, String nomUnite) 
     {
         this.matricule = matricule;
         this.nom = nom;
@@ -18,18 +32,6 @@ public class Visiteur
         this.codeUnite = codeUnite;
         this.nomUnite = nomUnite;
     }
-    protected String matricule;
-    protected String nom;
-    protected String prenom;
-    protected String login;
-    protected String mdp;
-    protected String adresse;
-    protected Localite uneLocalite;
-    protected String telephone;
-    protected Date dateEntree;
-    protected int prime;
-    protected String codeUnite;
-    protected String nomUnite;
 
     public String getMatricule() 
     {
@@ -95,11 +97,11 @@ public class Visiteur
     {
         this.telephone = telephone;
     }
-    public Date getDateEntree() 
+    public String getDateEntree() 
     {
         return dateEntree;
     }
-    public void setDateEntree(Date dateEntree) 
+    public void setDateEntree(String dateEntree) 
     {
         this.dateEntree = dateEntree;
     }
