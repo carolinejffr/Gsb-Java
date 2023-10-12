@@ -7,7 +7,7 @@ public class sgdb
 
     public static void utiliserSgdb(String laRequete, boolean doitAfficherResultat) 
     {
-        String url = "jdbc:mysql://127.0.0.1:8889/";
+        String url = "jdbc:mysql://localhost:3306/gsbV2";
         String user = "root";
         String password = "password";
         Connection con = null;
