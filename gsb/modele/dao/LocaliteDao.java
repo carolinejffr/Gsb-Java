@@ -13,6 +13,7 @@ public class LocaliteDao
         // On vérifie que la localité existe en DB.
         System.out.println("La ville qui correspond au code " + codeLocalite + " est : " + sgdb.retournerString("SELECT VILLE FROM gsbV2.LOCALITE WHERE CODEPOSTAL =" + codeLocalite));
 
+        // Retourner la localité
         Localite laLocalite = null;
         for (int i = 0; i < listeLocalite.size(); i++)
         {
@@ -32,13 +33,32 @@ public class LocaliteDao
         return laLocalite;
     }
     // creer
-    // public static int creer(Localite uneLocalite)
-    // {
+    public static int creer(Localite uneLocalite, ArrayList<Localite> listeLocalite)
+    {
+        try
+        {
+            // Insertion dans la base de données
+            sgdb.utiliserSgdb("INSERT INTO gsbV2.LOCALITE VALUES ('" + uneLocalite.getCodePostal() + "', '" + uneLocalite.getVille() + "')", false);
+            listeLocalite.add(uneLocalite);
+            return 1;
+        }
+        catch (Exception e)
+        {
+            return 0;
+        }
+    }
+    // retourner
+     public static ArrayList<Localite> retournerLesLocalites()
+    {
+        ArrayList<Localite> listeLocalites = new ArrayList<Localite>();
 
-    // }
-    // // retourner
-    // public static ArrayList<Localite> retournerLesLocalites()
-    // {
-
-    // }
+        ArrayList<String> stringLocalite = sgdb.RequeteListString("SELECT * FROM gsbV2.LOCALITE");
+        for (int i = 0; i < stringLocalite.size(); i++)
+        {
+            String laLocalite[] = stringLocalite.get(i).split(" ");
+            Localite uneLocalite = new Localite(laLocalite[0], laLocalite[1]);
+            listeLocalites.add(uneLocalite);
+        }
+        return listeLocalites;
+    }
 }
