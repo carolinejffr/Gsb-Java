@@ -15,6 +15,7 @@ public class Visiteur
     protected int prime;
     protected String codeUnite;
     protected String nomUnite;
+    
 
     public Visiteur(String matricule, String nom, String prenom, String login, String mdp, String adresse,
             Localite uneLocalite, String telephone, String dateEntree, int prime, String codeUnite, String nomUnite) 

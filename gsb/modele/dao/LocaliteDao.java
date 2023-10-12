@@ -8,6 +8,7 @@ import gsb.utils.sgdb;
 public class LocaliteDao 
 {
     // rechercher
+    // j'ai ajouté la liste en paramètre pour simplifier la vérification que la localité existe bien en base ET en local
     public static Localite rechercher(String codeLocalite, ArrayList<Localite> listeLocalite)
     {
         // On vérifie que la localité existe en DB.
@@ -33,6 +34,7 @@ public class LocaliteDao
         return laLocalite;
     }
     // creer
+    // J'ai ajouté la liste en local pour simplifier le fait qu'il faille créer dans la db ET en local
     public static int creer(Localite uneLocalite, ArrayList<Localite> listeLocalite)
     {
         try
@@ -55,6 +57,7 @@ public class LocaliteDao
         ArrayList<String> stringLocalite = sgdb.RequeteListString("SELECT * FROM gsbV2.LOCALITE");
         for (int i = 0; i < stringLocalite.size(); i++)
         {
+            // De base, chaque élément de la liste a toutes les données en une string, on doit la couper là où il y a des espaces
             String laLocalite[] = stringLocalite.get(i).split(" ");
             Localite uneLocalite = new Localite(laLocalite[0], laLocalite[1]);
             listeLocalites.add(uneLocalite);
