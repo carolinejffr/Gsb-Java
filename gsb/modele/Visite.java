@@ -3,12 +3,12 @@ package gsb.modele;
 public class Visite 
 {
     protected String reference;
-    protected Date date;
+    protected String date;
     protected String commentaire;
     protected Medecin unMedecin;
     protected Visiteur unVisiteur;
 
-    public Visite(String reference, Date date, String commentaire, Medecin unMedecin, Visiteur unVisiteur) 
+    public Visite(String reference, String date, String commentaire, Medecin unMedecin, Visiteur unVisiteur) 
     {
         this.reference = reference;
         this.date = date;
@@ -27,12 +27,12 @@ public class Visite
         this.reference = reference;
     }
 
-    public Date getDate() 
+    public String getDate() 
     {
         return date;
     }
 
-    public void setDate(Date date) 
+    public void setDate(String date) 
     {
         this.date = date;
     }
