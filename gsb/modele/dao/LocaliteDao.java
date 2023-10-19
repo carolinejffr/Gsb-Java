@@ -1,67 +1,38 @@
+/*
+ * Créé le 22 févr. 2015
+ *
+ * TODO Pour changer le modèle de ce fichier généré, allez à :
+ * Fenêtre - Préférences - Java - Style de code - Modèles de code
+ */
 package gsb.modele.dao;
 
-import java.util.ArrayList;
-
 import gsb.modele.Localite;
-import gsb.utils.sgdb;
 
-public class LocaliteDao 
-{
-    // rechercher
-    // j'ai ajouté la liste en paramètre pour simplifier la vérification que la localité existe bien en base ET en local
-    public static Localite rechercher(String codeLocalite, ArrayList<Localite> listeLocalite)
-    {
-        // On vérifie que la localité existe en DB.
-        System.out.println("La ville qui correspond au code " + codeLocalite + " est : " + sgdb.retournerString("SELECT VILLE FROM gsbV2.LOCALITE WHERE CODEPOSTAL =" + codeLocalite));
+import java.sql.ResultSet;
 
-        // Retourner la localité
-        Localite laLocalite = null;
-        for (int i = 0; i < listeLocalite.size(); i++)
-        {
-            if (listeLocalite.get(i).getCodePostal() == codeLocalite)
-            {
-                laLocalite = listeLocalite.get(i);
-            }
-        }
-        if (laLocalite == null)
-        {
-            System.out.println("Attention, laLocalite est null.");
-        }
-        else
-        {
-            System.out.println("laLocalite a été retournée avec succès.");
-        }
-        return laLocalite;
-    }
-    // creer
-    // J'ai ajouté la liste en local pour simplifier le fait qu'il faille créer dans la db ET en local
-    public static int creer(Localite uneLocalite, ArrayList<Localite> listeLocalite)
-    {
-        try
-        {
-            // Insertion dans la base de données
-            sgdb.utiliserSgdb("INSERT INTO gsbV2.LOCALITE VALUES ('" + uneLocalite.getCodePostal() + "', '" + uneLocalite.getVille() + "')", false);
-            listeLocalite.add(uneLocalite);
-            return 1;
-        }
-        catch (Exception e)
-        {
-            return 0;
-        }
-    }
-    // retourner
-     public static ArrayList<Localite> retournerLesLocalites()
-    {
-        ArrayList<Localite> listeLocalites = new ArrayList<Localite>();
 
-        ArrayList<String> stringLocalite = sgdb.RequeteListString("SELECT * FROM gsbV2.LOCALITE");
-        for (int i = 0; i < stringLocalite.size(); i++)
-        {
-            // De base, chaque élément de la liste a toutes les données en une string, on doit la couper là où il y a des espaces
-            String laLocalite[] = stringLocalite.get(i).split(" ");
-            Localite uneLocalite = new Localite(laLocalite[0], laLocalite[1]);
-            listeLocalites.add(uneLocalite);
-        }
-        return listeLocalites;
-    }
+/**
+ * @author Isabelle
+ * 22 févr. 2015
+ * TODO Pour changer le modèle de ce commentaire de type généré, allez à :
+ * Fenêtre - Préférences - Java - Style de code - Modèles de code
+ */
+public class LocaliteDao {
+	
+	public static Localite rechercher(String codeLocalite){
+		Localite uneLocalite=null;
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from LOCALITE where CODEPOSTAL='"+codeLocalite+"'");
+		try {
+			if (reqSelection.next()) {
+				uneLocalite = new Localite(reqSelection.getString(1), reqSelection.getString(2));	
+			};
+			}
+		catch(Exception e) {
+			System.out.println("erreur reqSelection.next() pour la requête - select * from LOCALITE where CODEPOSTAL='"+codeLocalite+"'");
+			e.printStackTrace();
+			}
+		ConnexionMySql.fermerConnexionBd();
+		return uneLocalite;
+	}
+
 }
