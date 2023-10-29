@@ -63,6 +63,9 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		JMenuItem mC2 = new JMenuItem("Liste Medecins");
 		mC2.addActionListener(this);
 		mMedecins.add(mC2);
+		JMenuItem mC3 = new JMenuItem("Ajout Medecin");
+		mC3.addActionListener(this);
+		mMedecins.add(mC3);
 
 		mMedicaments = new JMenu("Medicaments");
 		JMenuItem mE1 = new JMenuItem("Consultation Medicament");
@@ -90,16 +93,24 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		// TODO Raccord de méthode auto-généré
 		if (evt.getSource() instanceof JMenuItem) {
 			String ChoixOption = evt.getActionCommand();
 
-			if (ChoixOption.equals("Consultation Medecin")) {
+			if (ChoixOption.equals("Consultation Medecin")) 
+			{
 				// Creation d'une sous-fenêtre
 				ouvrirFenetre(new JIFMedecinCons());
 
-			} else if (ChoixOption.equals("Liste Medecins")) {
+			} 
+			else if (ChoixOption.equals("Liste Medecins")) 
+			{
 				ouvrirFenetre(new JIFMedecinListeDic(this));
+			}
+
+			// Ajouts perso -Caroline 
+			else if (ChoixOption.equals("Ajout Medecin")) 
+			{
+				ouvrirFenetre(new JIFMedecinAjout());
 			}
 
 		}

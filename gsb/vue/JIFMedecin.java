@@ -7,10 +7,14 @@
 package gsb.vue;
 
 import gsb.modele.Medecin;
+import gsb.modele.dao.MedecinDao;
+import gsb.modele.dao.ConnexionMySql;
 
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -47,6 +51,9 @@ public class JIFMedecin extends JInternalFrame  {
     protected JTextField JTtelephone;
     protected JTextField JTpotentiel;
     protected JTextField JTspecialite;
+
+    // Ajout d'une liste pour faciliter la verifChamps -Caroline
+    protected ArrayList<JTextField> champs;
 	
     public JIFMedecin() {
     	p = new JPanel();  // panneau principal de la fenêtre
@@ -73,6 +80,16 @@ public class JIFMedecin extends JInternalFrame  {
          JTtelephone = new JTextField();
          JTpotentiel = new JTextField();
          JTspecialite = new JTextField();
+
+         // Instanciation de l'ArrayList et ajouts de tous les champs utilisés pour l'ajout d'un médecin.
+         champs = new ArrayList<JTextField>();
+         champs.add(JTnom);
+         champs.add(JTprenom);
+         champs.add(JTadresse);
+         champs.add(JTcp);
+         champs.add(JTtelephone);
+         champs.add(JTpotentiel);
+         champs.add(JTspecialite);
          
          pTexte.add(JLcode);
          pTexte.add(JTcode);
@@ -128,6 +145,57 @@ public class JIFMedecin extends JInternalFrame  {
         JTspecialite.setText("");
      }
 
+    /*
+    * Vérifie si tous les champs ont été correctement rempli
+    * @author Caroline Jaffré
+    * @return true si tous les champs sont bons, false s'il y a un champ vide.
+    */
+    public boolean verifChamps()
+    {
+        boolean verif = true;
+        // On vérifie qu'aucun champ n'est null
+        for (int i = 0; i < champs.size(); i++)
+        {
+            // A l'exception du champ potentiel car visiblement dans la base de données c'est vide par défaut.
+            if (champs.get(i).getText().isEmpty() == true && champs.get(i) != JTpotentiel)
+            {
+                // S'il est null, return false et print index
+                verif = false;
+                System.out.println("Le champ à l'index numéro " + i + " est vide !");
+                System.out.println(i + " : " + champs.get(i).getText());
+            }
+        }
+        return verif;
+    }
+
+    /*
+    * Cette méthode est appellée si VerifChamp est correct, dans JIFMedecinAjout.
+    * Elle récupère toutes les valeurs des champs et envoie la requête SQL d'insertion du médecin
+    * @author Caroline Jaffré
+    */
+    public int ajoutMedecinBDD()
+    {
+        // On commence par récupérer toutes les valeurs
+        ArrayList<String> StringChamps = new ArrayList<String>();
+
+        for (int i = 0; i < champs.size(); i++)
+        {
+            StringChamps.add(champs.get(i).getText());
+        }
+        
+        // On a besoin de générer le CodeMed.
+        ArrayList<Medecin> lesMedecins = MedecinDao.retournerCollectionDesMedecins();
+        int numCode = lesMedecins.size() + 1;
+        String codeMed = ("m" + String.format("%03d", numCode));
+        System.out.println(codeMed);
+
+        // On créé la requête SQL. J'utilise String.format car je trouve ça plus lisible quand il y a autant de variables.
+        String laRequete = String.format("INSERT INTO `medecin` (`CODEMED`, `NOM`, `PRENOM`, `ADRESSE`, `CODEPOSTAL`, `TELEPHONE`, `POTENTIEL`, `SPECIALITE`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+         codeMed, StringChamps.get(0), StringChamps.get(1), StringChamps.get(2), StringChamps.get(3), StringChamps.get(4), StringChamps.get(5), StringChamps.get(6));
+        System.out.println(laRequete);
+        int reqMaj = ConnexionMySql.execReqMaj(laRequete);
+        return reqMaj;
+    }
 
     
 }
