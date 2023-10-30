@@ -147,6 +147,7 @@ public class JIFMedecin extends JInternalFrame  {
 
     /*
     * Vérifie si tous les champs ont été correctement rempli
+    * Elle permet aussi de mettre en forme les champs
     * @author Caroline Jaffré
     * @return true si tous les champs sont bons, false s'il y a un champ vide.
     */
@@ -165,6 +166,27 @@ public class JIFMedecin extends JInternalFrame  {
                 System.out.println(i + " : " + champs.get(i).getText());
             }
         }
+        // Mise en forme des champs
+        // Nom et prenom en majuscule
+        JTnom.setText(JTnom.getText().toUpperCase());
+        JTprenom.setText(JTprenom.getText().toUpperCase());
+
+        // tirets automatiques dans le numero de telephone
+        if (JTtelephone.getText().length() == 10)
+        {
+            String ancienNumero = JTtelephone.getText();
+            StringBuilder numeroFormat = new StringBuilder();
+            for (int i = 0; i < ancienNumero.length(); i++)
+            {
+                if (i % 2 == 0 && i > 0) 
+                {
+                    numeroFormat.append('-');
+                }
+                numeroFormat.append(ancienNumero.charAt(i));
+            }
+            JTtelephone.setText(numeroFormat.toString());
+        }
+        
         return verif;
     }
 
@@ -182,6 +204,11 @@ public class JIFMedecin extends JInternalFrame  {
         for (int i = 0; i < champs.size(); i++)
         {
             StringChamps.add(champs.get(i).getText());
+            // Ceci permet d'éviter un bug SQL si l'un des champs contient une apostrophe
+            if (StringChamps.get(i).contains("'"))
+            {
+                StringChamps.set(i, StringChamps.get(i).replace("'", "\\'"));
+            }
         }
         
         // On a besoin de générer le CodeMed.

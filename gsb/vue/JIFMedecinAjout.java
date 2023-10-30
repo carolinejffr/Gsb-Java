@@ -112,6 +112,7 @@ public class JIFMedecinAjout extends JIFMedecin  implements ActionListener {
                 else if (codeRequete == 2)
                 {
                     labelErreur.setText("Insertion réussie !");
+                    viderText();
                 }
             }
             // Sinon, on affiche un message d'erreur
