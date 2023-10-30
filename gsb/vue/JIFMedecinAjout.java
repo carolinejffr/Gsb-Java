@@ -1,20 +1,19 @@
 package gsb.vue;
 
-import gsb.modele.Medecin;
-import gsb.modele.dao.MedecinDao;
-
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
+import gsb.modele.Localite;
+/*
+ * Une vue permettant d'ajouter un nouveau médecin.
+ * @author Caroline Jaffré
+ */
 public class JIFMedecinAjout extends JIFMedecin  implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
@@ -22,6 +21,9 @@ public class JIFMedecinAjout extends JIFMedecin  implements ActionListener {
     private JButton ajouter;
     private JLabel labelErreur;
     private JPanel pErreur;
+
+    // Ce label sert à la mise en page et s'assure que les erreurs soient bien en-dessous des boutons
+    private JLabel labelBreak;
 
         
     public JIFMedecinAjout() {
@@ -40,6 +42,9 @@ public class JIFMedecinAjout extends JIFMedecin  implements ActionListener {
 
         pErreur = new JPanel();
         p.add(pErreur);
+
+        labelBreak = new JLabel("<html><br/></html>");
+        pErreur.add(labelBreak);
         labelErreur = new JLabel("");
         pErreur.add(labelErreur);
 
@@ -67,22 +72,49 @@ public class JIFMedecinAjout extends JIFMedecin  implements ActionListener {
         }
         else if (source == ajouter)
         {
+            // On commence par vérifier si les champs sont valides
             boolean verif = verifChamps();
             System.out.println("Verif = " + verif);
 
+            // Si c'est bon, on teste la requête SQL
             if (verif == true)
             {
-                int reqMaj = ajoutMedecinBDD();
-                if (reqMaj == 0)
+                int codeRequete = ajoutMedecinBDD();
+                // La requête a échouée
+                if (codeRequete == 0)
                 {
-                    labelErreur.setText("Echec requête. Vérifiez le contenu de vos champs. (Est-ce que la localité existe ?)");
+                    // Si cette erreur arrive, c'est soit que le contenu des champs n'est pas bon, soit que la localité (code postal) n'existe pas en BDD.
+                    Localite laLocalite = testLocalite();
+                    if (laLocalite == null)
+                    {
+                        labelErreur.setText("<html>Le code postal indiquée n'existe pas dans la base de données.<br/>Veuillez l'ajouter avant de réessayer.</html>");
+                    }
+                    else
+                    {
+                        // On teste alors le contenu des champs :
+                        String laString = testLongueur();
+                        if (laString != null)
+                        {
+                            labelErreur.setText("Le contenu du champ " + laString + " est trop long !");
+                        }
+                        else
+                        {
+                            labelErreur.setText("Echec requête. Vérifiez le contenu de vos champs.");
+                        }
+                    }
                 }
-                else if (reqMaj == 1)
+                // L'insertion SQL a réussi mais pas la récupération du médecin en local. Cela ne devrai normalement jamais arriver...
+                else if (codeRequete == 1)
+                {
+                    labelErreur.setText("Insertion BDD réussie mais impossible de récupérer le médecin en local.");
+                }
+                // L'insertion s'est déroulée normalement.
+                else if (codeRequete == 2)
                 {
                     labelErreur.setText("Insertion réussie !");
-                    viderText();
                 }
             }
+            // Sinon, on affiche un message d'erreur
             else
             {
                 labelErreur.setText("Veuillez remplir tous les champs obligatoires (tous sauf potentiel)");

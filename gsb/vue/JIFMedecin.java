@@ -6,14 +6,14 @@
  */
 package gsb.vue;
 
+import gsb.modele.Localite;
 import gsb.modele.Medecin;
 import gsb.modele.dao.MedecinDao;
 import gsb.modele.dao.ConnexionMySql;
+import gsb.modele.dao.LocaliteDao;
 
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import javax.swing.JInternalFrame;
@@ -175,6 +175,7 @@ public class JIFMedecin extends JInternalFrame  {
     */
     public int ajoutMedecinBDD()
     {
+        int codeRequete = 0;
         // On commence par récupérer toutes les valeurs
         ArrayList<String> StringChamps = new ArrayList<String>();
 
@@ -194,7 +195,71 @@ public class JIFMedecin extends JInternalFrame  {
          codeMed, StringChamps.get(0), StringChamps.get(1), StringChamps.get(2), StringChamps.get(3), StringChamps.get(4), StringChamps.get(5), StringChamps.get(6));
         System.out.println(laRequete);
         int reqMaj = ConnexionMySql.execReqMaj(laRequete);
-        return reqMaj;
+
+        // Si la requête a aboutie, on ajoute le médecin en local.
+        if (reqMaj == 1)
+        {
+            codeRequete = 1;
+            Medecin leMedecin = MedecinDao.rechercher(codeMed);
+            if (leMedecin != null)
+            {
+                codeRequete = 2;
+            }
+        }
+        return codeRequete;
+    }
+
+    /*
+     * Cette fonction vérifié si la localité existe. Elle est utilisé dans JIFMedecinAjout.
+     * @author Caroline Jaffré
+     */
+    public Localite testLocalite()
+    {
+        Localite laLocalite = null;
+        laLocalite = LocaliteDao.rechercher(JTcp.getText());
+
+        return laLocalite;
+    }
+
+    /*
+     * Cette fonction vérifié si le contenu des champs est de la bonne longueur, pour respecter ce qui est en BDD.
+     * @author Caroline Jaffré
+     */
+    public String testLongueur()
+    {
+        String laString = null;
+
+        // Pas besoin de tester codeMed (généré par le code)
+        // Pas besoin de tester code postal (testé avant)
+        // Nom, prenom, adresse, potentiel et specialite sont des VARCHAR(50)
+        if (JTnom.getText().length() > 50)
+        {
+            laString = "Nom";
+        }
+        else if (JTprenom.getText().length() > 50)
+        {
+            laString = "Prenom";
+        }
+        else if (JTadresse.getText().length() > 50)
+        {
+            laString = "Adresse";
+        }
+        else if (JTpotentiel.getText().length() > 50)
+        {
+            laString = "Potentiel";
+        }
+        else if (JTspecialite.getText().length() > 50)
+        {
+            laString = "Specialite";
+        }
+        // telephone est un VARCHAR(15)
+        else if (JTtelephone.getText().length() > 15)
+        {
+            laString = "Telephone";
+        }
+
+
+        return laString;
     }
 
     

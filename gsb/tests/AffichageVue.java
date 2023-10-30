@@ -1,6 +1,5 @@
 package gsb.tests;
 
-import gsb.utils.sgdb;
 import gsb.vue.Accueil;
 
 public class AffichageVue 
