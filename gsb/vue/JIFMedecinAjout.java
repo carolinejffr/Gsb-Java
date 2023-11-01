@@ -32,8 +32,8 @@ public class JIFMedecinAjout extends JIFMedecin  implements ActionListener {
         // On n'a pas besoin de ces champs pour le formulaire, donc on les rends invisibles.
         JTcode.setVisible(false);
         JLcode.setVisible(false);
-        JTville.setVisible(false);
-        JLville.setVisible(false);
+        //JTcp.setVisible(false);
+        //JLcp.setVisible(false);
 
         vider = new JButton("Vider les champs");
         pBoutons.add(vider);
@@ -87,7 +87,7 @@ public class JIFMedecinAjout extends JIFMedecin  implements ActionListener {
                     Localite laLocalite = testLocalite();
                     if (laLocalite == null)
                     {
-                        labelErreur.setText("<html>Le code postal indiquée n'existe pas dans la base de données.<br/>Veuillez l'ajouter avant de réessayer.</html>");
+                        labelErreur.setText("<html>La ville indiquée n'existe pas dans la base de données.<br/>Veuillez l'ajouter avant de réessayer.</html>");
                     }
                     else
                     {

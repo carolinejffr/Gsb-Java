@@ -9,6 +9,7 @@ package gsb.vue;
 import gsb.modele.Localite;
 import gsb.modele.Medecin;
 import gsb.modele.dao.MedecinDao;
+import gsb.service.LocaliteService;
 import gsb.modele.dao.ConnexionMySql;
 import gsb.modele.dao.LocaliteDao;
 
@@ -86,7 +87,7 @@ public class JIFMedecin extends JInternalFrame  {
          champs.add(JTnom);
          champs.add(JTprenom);
          champs.add(JTadresse);
-         champs.add(JTcp);
+         champs.add(JTville);
          champs.add(JTtelephone);
          champs.add(JTpotentiel);
          champs.add(JTspecialite);
@@ -170,6 +171,8 @@ public class JIFMedecin extends JInternalFrame  {
         // Nom et prenom en majuscule
         JTnom.setText(JTnom.getText().toUpperCase());
         JTprenom.setText(JTprenom.getText().toUpperCase());
+        // Majuscule au début du nom de la ville
+        JTville.setText(JTville.getText().substring(0 , 1).toUpperCase() + JTville.getText().substring(1));
 
         // tirets automatiques dans le numero de telephone
         if (JTtelephone.getText().length() == 10)
@@ -217,9 +220,13 @@ public class JIFMedecin extends JInternalFrame  {
         String codeMed = ("m" + String.format("%03d", numCode));
         System.out.println(codeMed);
 
+        // Le champ à l'index 3 contient la ville. Hors, nous avons besoin du code postal !
+        String leCodePostal = LocaliteService.getCodePostal(StringChamps.get(3));
+        
+
         // On créé la requête SQL. J'utilise String.format car je trouve ça plus lisible quand il y a autant de variables.
         String laRequete = String.format("INSERT INTO `medecin` (`CODEMED`, `NOM`, `PRENOM`, `ADRESSE`, `CODEPOSTAL`, `TELEPHONE`, `POTENTIEL`, `SPECIALITE`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
-         codeMed, StringChamps.get(0), StringChamps.get(1), StringChamps.get(2), StringChamps.get(3), StringChamps.get(4), StringChamps.get(5), StringChamps.get(6));
+         codeMed, StringChamps.get(0), StringChamps.get(1), StringChamps.get(2), leCodePostal, StringChamps.get(4), StringChamps.get(5), StringChamps.get(6));
         System.out.println(laRequete);
         int reqMaj = ConnexionMySql.execReqMaj(laRequete);
 
