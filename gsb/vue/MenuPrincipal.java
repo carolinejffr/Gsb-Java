@@ -37,6 +37,8 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	protected JMenu mMedecins;
 	protected JMenu mMedicaments;
 	protected JMenu mVisiteurs;
+	protected JMenu mLocalites;
+
 
 
 	JMenu mVisites;
@@ -102,11 +104,16 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		mV5.addActionListener(this);
 		mVisiteurs.add(mV5);
 		
+		mLocalites = new JMenu("Localites");
+		JMenuItem mL1 = new JMenuItem("Ajout Localite");
+		mL1.addActionListener(this); // installation d'un écouteur d'action
+		mLocalites.add(mL1);
 
 		mbar.add(mMedecins);
 		mbar.add(mMedicaments);
 		mbar.add(mVisites);
 		mbar.add(mVisiteurs);
+		mbar.add(mLocalites);
 		setJMenuBar(mbar);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -133,7 +140,10 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			{
 				ouvrirFenetre(new JIFMedecinAjout());
 			}
-
+			else if (ChoixOption.equals("Ajout Localite")) 
+			{
+				ouvrirFenetre(new JIFLocaliteAjout());
+			}
 		}
 
 	}

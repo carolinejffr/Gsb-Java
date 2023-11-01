@@ -40,8 +40,7 @@ public class JIFMedecin extends JInternalFrame  {
     protected JLabel JLville;
     protected JLabel JLtelephone;
     protected JLabel JLpotentiel;
-    protected JLabel JLspecialite
-    ;
+    protected JLabel JLspecialite;
     
 	protected JTextField JTcode;
 	protected JTextField JTnom;
@@ -73,7 +72,7 @@ public class JIFMedecin extends JInternalFrame  {
          
          JTcode = new JTextField(20);
          JTcode.setMaximumSize(JTcode.getPreferredSize());
-         JTnom = new JTextField();
+         JTnom = new JTextField(20);
          JTprenom = new JTextField();
          JTadresse = new JTextField();    
          JTcp = new JTextField();
@@ -172,7 +171,10 @@ public class JIFMedecin extends JInternalFrame  {
         JTnom.setText(JTnom.getText().toUpperCase());
         JTprenom.setText(JTprenom.getText().toUpperCase());
         // Majuscule au début du nom de la ville
-        JTville.setText(JTville.getText().substring(0 , 1).toUpperCase() + JTville.getText().substring(1));
+        if (JTville.getText().isEmpty() == false)
+        {
+            JTville.setText(JTville.getText().substring(0 , 1).toUpperCase() + JTville.getText().substring(1));
+        }
 
         // tirets automatiques dans le numero de telephone
         if (JTtelephone.getText().length() == 10)
@@ -229,6 +231,7 @@ public class JIFMedecin extends JInternalFrame  {
          codeMed, StringChamps.get(0), StringChamps.get(1), StringChamps.get(2), leCodePostal, StringChamps.get(4), StringChamps.get(5), StringChamps.get(6));
         System.out.println(laRequete);
         int reqMaj = ConnexionMySql.execReqMaj(laRequete);
+        ConnexionMySql.fermerConnexionBd();
 
         // Si la requête a aboutie, on ajoute le médecin en local.
         if (reqMaj == 1)
@@ -240,6 +243,7 @@ public class JIFMedecin extends JInternalFrame  {
                 codeRequete = 2;
             }
         }
+        
         return codeRequete;
     }
 

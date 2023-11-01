@@ -28,12 +28,16 @@ public class JIFMedecinAjout extends JIFMedecin  implements ActionListener {
         
     public JIFMedecinAjout() {
         super();
-
         // On n'a pas besoin de ces champs pour le formulaire, donc on les rends invisibles.
         JTcode.setVisible(false);
         JLcode.setVisible(false);
-        //JTcp.setVisible(false);
-        //JLcp.setVisible(false);
+        JLcp.setVisible(false);
+        JTcp.setVisible(false);
+        pTexte.remove(JTcode);
+        pTexte.remove(JLcode);
+        pTexte.remove(JTcp);
+        pTexte.remove(JLcp);
+        
 
         vider = new JButton("Vider les champs");
         pBoutons.add(vider);
