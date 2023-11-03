@@ -38,6 +38,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	protected JMenu mMedicaments;
 	protected JMenu mVisiteurs;
 	protected JMenu mLocalites;
+	protected JMenu mStock;
 
 
 
@@ -97,12 +98,14 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		JMenuItem mV3 = new JMenuItem("Ajout Visiteur");
 		mV3.addActionListener(this);
 		mVisiteurs.add(mV3);
-		JMenuItem mV4 = new JMenuItem("Stock Echantillons Visiteur");
-		mV4.addActionListener(this);
-		mVisiteurs.add(mV4);
-		JMenuItem mV5 = new JMenuItem("Ajout Echantillons Visiteur");
-		mV5.addActionListener(this);
-		mVisiteurs.add(mV5);
+		
+		mStock = new JMenu("Stock");
+		JMenuItem mS1 = new JMenuItem("Stock Echantillons Visiteur");
+		mS1.addActionListener(this);
+		mStock.add(mS1);
+		JMenuItem mS2 = new JMenuItem("Ajout Echantillons Visiteur");
+		mS2.addActionListener(this);
+		mStock.add(mS2);
 		
 		mLocalites = new JMenu("Localites");
 		JMenuItem mL1 = new JMenuItem("Ajout Localite");
@@ -113,6 +116,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		mbar.add(mMedicaments);
 		mbar.add(mVisites);
 		mbar.add(mVisiteurs);
+		mbar.add(mStock);
 		mbar.add(mLocalites);
 		setJMenuBar(mbar);
 		this.setVisible(true);
@@ -143,6 +147,10 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			else if (ChoixOption.equals("Ajout Localite")) 
 			{
 				ouvrirFenetre(new JIFLocaliteAjout());
+			}
+			else if (ChoixOption.equals("Ajout Echantillons Visiteur")) 
+			{
+				ouvrirFenetre(new JIFStockAjout());
 			}
 		}
 
