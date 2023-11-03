@@ -129,6 +129,7 @@ public class JIFStockAjout extends JIFMedecin  implements ActionListener
                     String leVisiteur = (String)JCVisiteur.getSelectedItem();
                     String leMedicament = (String)JCMedicament.getSelectedItem();
                     String message = "Ajouter " + quantite + " de " + leMedicament + " a " + leVisiteur + " ?";
+                    // Puisque cet ajout est assez rapide (avec les JComboBox) j'ai ajouté une popup pour être sûr que l'utilisateur ne s'est pas trompé dans son choix.
                     int choix = JOptionPane.showConfirmDialog(p, message, "Validation", JOptionPane.YES_NO_OPTION);
                     if (choix == JOptionPane.YES_OPTION)
                     {
