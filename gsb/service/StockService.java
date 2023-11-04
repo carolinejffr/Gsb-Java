@@ -1,5 +1,7 @@
 package gsb.service;
 
+import java.util.ArrayList;
+
 import gsb.modele.Stocker;
 import gsb.modele.dao.ConnexionMySql;
 import gsb.modele.dao.StockDao;
@@ -49,6 +51,12 @@ public class StockService
         }
         ConnexionMySql.fermerConnexionBd();
         return codeRequete;
+    }
+    public static ArrayList<Stocker> listeStockVisiteur(String unMatricule)
+    {
+        ArrayList<Stocker> laListe = StockDao.rechercher(unMatricule);
+
+        return laListe;
     }
  }
     
