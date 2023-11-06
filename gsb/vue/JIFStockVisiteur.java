@@ -70,8 +70,6 @@ public class JIFStockVisiteur extends JIFMedecin  implements ActionListener
         contentPane.add(p);
         JCVisiteur.addActionListener(this);
 
-        updateTableau();
-
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setTitle("Stock echantillon pour un visiteur");
         // ajout d'un écouteur d'évènement pour la fermeture de la fenêtre
@@ -83,17 +81,11 @@ public class JIFStockVisiteur extends JIFMedecin  implements ActionListener
     }
     public void actionPerformed(ActionEvent evt) 
     { 
-       updateTableau();
-    }
-    public void updateTableau()
-    {
         String visiteurSelect = (String)JCVisiteur.getSelectedItem();
         ArrayList<Stocker> listeStock = StockService.listeStockVisiteur(visiteurSelect);
-        // On supprime tous les anciennes lignes, sauf la première
-        for (int i = 1; i < tableModel.getRowCount(); i++)
-        {
-            tableModel.removeRow(i);
-        }
+        // On supprime tous les anciennes lignes
+        tableModel.setRowCount(1);
+        
         // Ensuite, on repeuple la liste avec les nouvelles infos
         for (int i = 0; i < listeStock.size(); i++)
         {
@@ -101,5 +93,4 @@ public class JIFStockVisiteur extends JIFMedecin  implements ActionListener
             tableModel.addRow(new Object[]{leStock.getUnMedicament().getDepotLegal(), leStock.getUnMedicament().getNomCommercial(), leStock.getQteStock()});
         }
     }
-    
 }
