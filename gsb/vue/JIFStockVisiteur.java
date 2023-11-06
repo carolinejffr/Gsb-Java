@@ -14,6 +14,9 @@ import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.DefaultTableModel;
 import gsb.modele.Stocker;
+import gsb.modele.Visiteur;
+import gsb.modele.dao.StockDao;
+import gsb.modele.dao.VisiteurDao;
 import gsb.service.StockService;
 import gsb.service.VisiteurService;
 
@@ -55,6 +58,14 @@ public class JIFStockVisiteur extends JIFMedecin  implements ActionListener
         tableModel.addColumn("Nom");
         tableModel.addColumn("Stock");
         tableModel.addRow(new Object[]{"Code", "Nom", "Stock"});
+
+        // Ajouts des données du premier visiteur :
+        ArrayList<Stocker> premierVisiteur = StockDao.rechercher(matricules.get(0));
+        for (int i = 0; i < premierVisiteur.size(); i++)
+        {
+            tableModel.addRow(new Object[]{premierVisiteur.get(i).getUnMedicament().getDepotLegal(), premierVisiteur.get(i).getUnMedicament().getNomCommercial(), premierVisiteur.get(i).getQteStock()});
+        }
+        
         table = new JTable(tableModel);
 
         // Scrollpane (zone défilante)
