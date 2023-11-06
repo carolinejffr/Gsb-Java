@@ -1,32 +1,19 @@
 package gsb.vue;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-
-
 import gsb.modele.Stocker;
-import gsb.service.MedicamentService;
 import gsb.service.StockService;
 import gsb.service.VisiteurService;
 
@@ -83,6 +70,8 @@ public class JIFStockVisiteur extends JIFMedecin  implements ActionListener
         contentPane.add(p);
         JCVisiteur.addActionListener(this);
 
+        updateTableau();
+
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setTitle("Stock echantillon pour un visiteur");
         // ajout d'un écouteur d'évènement pour la fermeture de la fenêtre
@@ -94,6 +83,10 @@ public class JIFStockVisiteur extends JIFMedecin  implements ActionListener
     }
     public void actionPerformed(ActionEvent evt) 
     { 
+       updateTableau();
+    }
+    public void updateTableau()
+    {
         String visiteurSelect = (String)JCVisiteur.getSelectedItem();
         ArrayList<Stocker> listeStock = StockService.listeStockVisiteur(visiteurSelect);
         // On supprime tous les anciennes lignes, sauf la première
