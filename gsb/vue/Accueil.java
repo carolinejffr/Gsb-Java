@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-public class Accueil extends JFrame
+public class accueil extends JFrame
 {
-    public Accueil()
+    public accueil()
     {
         // Définir le titre de la fenêtre
         setTitle("Accueil");
@@ -15,7 +15,7 @@ public class Accueil extends JFrame
         setSize(800, 600);
 
         // Définir le logo de la fenêtre
-        setIconImage(Toolkit.getDefaultToolkit().getImage(Accueil.class.getResource("/gsb/ressources/gsb_log.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(accueil.class.getResource("/gsb/ressources/gsb_log.png")));
 
         // Définir l'opération par défaut lorsque vous cliquez sur le bouton de fermeture de la fenêtre
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
