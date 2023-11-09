@@ -6,12 +6,17 @@
  */
 package gsb.vue;
 
-//import gsb.modele.Medecin;
+import gsb.modele.Medecin;
+import gsb.modele.Medecin;
 import gsb.modele.Visiteur;
+import gsb.modele.dao.ConnexionMySql;
+import gsb.modele.dao.MedecinDao;
+import gsb.service.LocaliteService;
 
 import java.awt.Container;
 import java.awt.GridLayout;
-//import java.awt.event.ActionEvent;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -54,7 +59,7 @@ public class JIFVisiteur extends JInternalFrame  {
     protected JTextField JTprime;
     protected JTextField JTcodeUnite;
     protected JTextField JTnomUnite;
-	
+	protected ArrayList<JTextField> champs;
     protected JButton Valider;
     protected JButton Vider;
 
@@ -66,6 +71,8 @@ public class JIFVisiteur extends JInternalFrame  {
     	 JLmatricule = new JLabel("Matricule");
          JLnom = new JLabel("Nom");
          JLprenom = new JLabel("Prénom");
+         JLlogin = new JLabel("Login");
+         JLmdp = new JLabel("Mot De Passe");
          JLadresse = new JLabel("Adresse rue");
          JLcp = new JLabel("Code postal");
          JLtelephone = new JLabel("Téléphone");
@@ -81,6 +88,8 @@ public class JIFVisiteur extends JInternalFrame  {
          JTmatricule.setMaximumSize(JTmatricule.getPreferredSize());
          JTnom = new JTextField();
          JTprenom = new JTextField();
+         JTlogin = new JTextField();
+         JTmdp = new JTextField();
          JTtelephone = new JTextField();
          JTadresse = new JTextField();    
          JTcp = new JTextField();
@@ -95,6 +104,10 @@ public class JIFVisiteur extends JInternalFrame  {
          pTexte.add(JTnom);
          pTexte.add(JLprenom);
          pTexte.add(JTprenom);
+         pTexte.add(JLlogin);
+         pTexte.add(JTlogin);
+         pTexte.add(JLmdp);
+         pTexte.add(JTmdp);
          pTexte.add(JLtelephone);
          pTexte.add(JTtelephone);
          pTexte.add(JLadresse);
@@ -114,12 +127,49 @@ public class JIFVisiteur extends JInternalFrame  {
          pBoutons.add(Vider);
          pBoutons.add(Valider);
         // mise en forme de la fenêtre
-
+        
          p.add(pTexte);
          p.add(pBoutons);
          Container contentPane = getContentPane();
          contentPane.add(p);
-
+        // Ajout d'une liste pour faciliter la verifChamps -Caroline
+        champs = new ArrayList<JTextField>();
+         champs.add(JTnom);
+         champs.add(JTprenom);
+         champs.add(JTlogin);
+         champs.add(JTmdp);
+         champs.add(JTtelephone);
+         champs.add(JTadresse);
+         champs.add(JTcp);
+         champs.add(JTdateEntree);
+         champs.add(JTprime);
+         champs.add(JTcodeUnite);
+         champs.add(JTnomUnite);
+         
+         pTexte.add(JLmatricule);
+         pTexte.add(JTmatricule);
+         pTexte.add(JLnom);
+         pTexte.add(JTnom);
+         pTexte.add(JLprenom);
+         pTexte.add(JTprenom);
+         pTexte.add(JLlogin);
+         pTexte.add(JTlogin);
+         pTexte.add(JLmdp);         
+         pTexte.add(JTmdp);
+         pTexte.add(JLtelephone);     
+         pTexte.add(JTtelephone);
+         pTexte.add(JLadresse);
+         pTexte.add(JTadresse);
+         pTexte.add(JLcp);
+         pTexte.add(JTcp);
+         pTexte.add(JLdateEntree);
+         pTexte.add(JTdateEntree);
+         pTexte.add(JLprime);
+         pTexte.add(JTprime);
+         pTexte.add(JLcodeUnite);
+         pTexte.add(JTcodeUnite);
+         pTexte.add(JLnomUnite);
+         pTexte.add(JTnomUnite);
 	}
     
     public void remplirText(Visiteur unVisiteur) 	
@@ -127,6 +177,8 @@ public class JIFVisiteur extends JInternalFrame  {
         JTmatricule.setText(unVisiteur.getMatricule());        
         JTnom.setText(unVisiteur.getNom());
         JTprenom.setText(unVisiteur.getPrenom());
+        JTlogin.setText(unVisiteur.getLogin());
+        JTmdp.setText(unVisiteur.getMdp());
         JTtelephone.setText(unVisiteur.getAdresse());
         JTadresse.setText(unVisiteur.getAdresse());    
         JTcp.setText(unVisiteur.getLogin());
@@ -141,6 +193,8 @@ public class JIFVisiteur extends JInternalFrame  {
         JTmatricule.setText("");        
         JTnom.setText("");
         JTprenom.setText("");
+        JTlogin.setText("");
+        JTmdp.setText("");
         JTtelephone.setText("");
         JTadresse.setText("");    
         JTcp.setText("");
@@ -150,56 +204,60 @@ public class JIFVisiteur extends JInternalFrame  {
         JTnomUnite.setText("");
      }
 
+      public int ajoutMedecinBDD()
+    {
+        int codeRequete = 0;
+        // On commence par récupérer toutes les valeurs
+        ArrayList<String> StringChamps = new ArrayList<String>();
 
-    /*
-    * Vérifie si tous les champs ont été correctement rempli
-    * Elle permet aussi de mettre en forme les champs
-    * @author Tallec--Even Léo
-    * @return true si tous les champs sont bons, false s'il y a un champ vide.
-    
-     public boolean verifChamps()
-     {
-         boolean verif = true;
-         // On vérifie qu'aucun champ n'est null
-         for (int i = 0; i < champs.size(); i++)
-         {
-             // A l'exception du champ potentiel car visiblement dans la base de données c'est vide par défaut.
-             if (champs.get(i).getText().isEmpty() == true && champs.get(i) != JTpotentiel)
-             {
-                 // S'il est null, return false et print index
-                 verif = false;
-                 System.out.println("Le champ à l'index numéro " + i + " est vide !");
-                 System.out.println(i + " : " + champs.get(i).getText());
-             }
-         }
-         // Mise en forme des champs
-         // Nom et prenom en majuscule
-         JTnom.setText(JTnom.getText().toUpperCase());
-         JTprenom.setText(JTprenom.getText().toUpperCase());
-         // Majuscule au début du nom de la ville
-         if (JTville.getText().isEmpty() == false)
-         {
-             JTville.setText(JTville.getText().substring(0 , 1).toUpperCase() + JTville.getText().substring(1));
-         }
- 
-         // tirets automatiques dans le numero de telephone
-         if (JTtelephone.getText().length() == 10)
-         {
-             String ancienNumero = JTtelephone.getText();
-             StringBuilder numeroFormat = new StringBuilder();
-             for (int i = 0; i < ancienNumero.length(); i++)
-             {
-                 if (i % 2 == 0 && i > 0) 
-                 {
-                     numeroFormat.append('-');
-                 }
-                 numeroFormat.append(ancienNumero.charAt(i));
-             }
-             JTtelephone.setText(numeroFormat.toString());
-         }
-         
-         return verif;
-     }*/
+        for (int i = 0; i < champs.size(); i++)
+        {
+            StringChamps.add(champs.get(i).getText());
+            // Ceci permet d'éviter un bug SQL si l'un des champs contient une apostrophe
+            if (StringChamps.get(i).contains("'"))
+            {
+                StringChamps.set(i, StringChamps.get(i).replace("'", "\\'"));
+            }
+        }
+        
+        // On a besoin de générer le CodeMed.
+        ArrayList<Medecin> lesMedecins = MedecinDao.retournerCollectionDesMedecins();
+        int numCode = lesMedecins.size() + 1;
+        String codeMed = ("m" + String.format("%03d", numCode));
+        System.out.println(codeMed);
+
+        // Le champ à l'index 3 contient la ville. Hors, nous avons besoin du code postal !
+        String leCodePostal = LocaliteService.getCodePostal(StringChamps.get(3));
+        
+
+        // On créé la requête SQL. J'utilise String.format car je trouve ça plus lisible quand il y a autant de variables.
+        String laRequete = String.format("INSERT INTO `VISITEUR` (`MATRICULE`, `NOM`, `PRENOM`,`LOGIN`,`MDP`,`TELEPHONE`, `ADRESSE`, `CODEPOSTAL`, `DATEENTRE`, `CODEUNIT`,`NOMUNIT`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s','%s','%s');",
+         codeMed,
+         StringChamps.get(0),
+         StringChamps.get(1),
+         StringChamps.get(2),
+         leCodePostal,
+         StringChamps.get(4),
+         StringChamps.get(5),
+         StringChamps.get(6));
+
+        System.out.println(laRequete);
+        int reqMaj = ConnexionMySql.execReqMaj(laRequete);
+        ConnexionMySql.fermerConnexionBd();
+
+        // Si la requête a aboutie, on ajoute le médecin en local.
+        if (reqMaj == 1)
+        {
+            codeRequete = 1;
+            Medecin leMedecin = MedecinDao.rechercher(codeMed);
+            if (leMedecin != null)
+            {
+                codeRequete = 2;
+            }
+        }
+        
+        return codeRequete;
+    }
     
 }
 
