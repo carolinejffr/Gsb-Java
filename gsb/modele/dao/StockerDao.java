@@ -1,8 +1,7 @@
 package gsb.modele.dao;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Insert;
+//import com.mysql.cj.x.protobuf.MysqlxCrud.Insert;
 
-import gsb.sgdb;
 import gsb.modele.*;
 
 public class StockerDao {

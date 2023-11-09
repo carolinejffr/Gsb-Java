@@ -1,7 +1,7 @@
 package gsb.vue;
 
 import javax.swing.*;
-import java.awt.Dimension;
+//import java.awt.Dimension;
 import java.awt.Toolkit;
 
 public class Accueil extends JFrame

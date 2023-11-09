@@ -109,10 +109,10 @@ public class JIFVisiteur extends JInternalFrame  {
          pTexte.add(JTcodeUnite);
          pTexte.add(JLnomUnite);
          pTexte.add(JTnomUnite);
-         Valider = new JButton("Valider");
-         Vider = new JButton("Vider");	
-         pBoutons.add(Valider);
+         Valider = new JButton("Ajouter");
+         Vider = new JButton("Vider les champs");	
          pBoutons.add(Vider);
+         pBoutons.add(Valider);
         // mise en forme de la fenêtre
 
          p.add(pTexte);
