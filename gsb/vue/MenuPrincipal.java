@@ -36,6 +36,11 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	protected JMenuBar mbar;
 	protected JMenu mMedecins;
 	protected JMenu mMedicaments;
+	protected JMenu mVisiteurs;
+	protected JMenu mLocalites;
+	protected JMenu mStock;
+
+
 
 	JMenu mVisites;
 
@@ -63,6 +68,9 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		JMenuItem mC2 = new JMenuItem("Liste Medecins");
 		mC2.addActionListener(this);
 		mMedecins.add(mC2);
+		JMenuItem mC3 = new JMenuItem("Ajout Medecin");
+		mC3.addActionListener(this);
+		mMedecins.add(mC3);
 
 		mMedicaments = new JMenu("Medicaments");
 		JMenuItem mE1 = new JMenuItem("Consultation Medicament");
@@ -80,9 +88,36 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		mA2.addActionListener(this);
 		mVisites.add(mA2);
 
+		mVisiteurs = new JMenu("Visiteurs");
+		JMenuItem mV1 = new JMenuItem("Liste Visiteurs");
+		mV1.addActionListener(this); // installation d'un écouteur d'action
+		mVisiteurs.add(mV1);
+		JMenuItem mV2 = new JMenuItem("Fiche Visiteur");
+		mV2.addActionListener(this);
+		mVisiteurs.add(mV2);
+		JMenuItem mV3 = new JMenuItem("Ajout Visiteur");
+		mV3.addActionListener(this);
+		mVisiteurs.add(mV3);
+		
+		mStock = new JMenu("Stock");
+		JMenuItem mS1 = new JMenuItem("Stock Echantillons Visiteur");
+		mS1.addActionListener(this);
+		mStock.add(mS1);
+		JMenuItem mS2 = new JMenuItem("Ajout Echantillons Visiteur");
+		mS2.addActionListener(this);
+		mStock.add(mS2);
+		
+		mLocalites = new JMenu("Localites");
+		JMenuItem mL1 = new JMenuItem("Ajout Localite");
+		mL1.addActionListener(this); // installation d'un écouteur d'action
+		mLocalites.add(mL1);
+
 		mbar.add(mMedecins);
 		mbar.add(mMedicaments);
 		mbar.add(mVisites);
+		mbar.add(mVisiteurs);
+		mbar.add(mStock);
+		mbar.add(mLocalites);
 		setJMenuBar(mbar);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,18 +125,37 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		// TODO Raccord de méthode auto-généré
 		if (evt.getSource() instanceof JMenuItem) {
 			String ChoixOption = evt.getActionCommand();
 
-			if (ChoixOption.equals("Consultation Medecin")) {
+			if (ChoixOption.equals("Consultation Medecin")) 
+			{
 				// Creation d'une sous-fenêtre
 				ouvrirFenetre(new JIFMedecinCons());
 
-			} else if (ChoixOption.equals("Liste Medecins")) {
+			} 
+			else if (ChoixOption.equals("Liste Medecins")) 
+			{
 				ouvrirFenetre(new JIFMedecinListeDic(this));
 			}
 
+			// Ajouts perso -Caroline 
+			else if (ChoixOption.equals("Ajout Medecin")) 
+			{
+				ouvrirFenetre(new JIFMedecinAjout());
+			}
+			else if (ChoixOption.equals("Ajout Localite")) 
+			{
+				ouvrirFenetre(new JIFLocaliteAjout());
+			}
+			else if (ChoixOption.equals("Ajout Echantillons Visiteur")) 
+			{
+				ouvrirFenetre(new JIFStockAjout());
+			}
+			else if (ChoixOption.equals("Stock Echantillons Visiteur")) 
+			{
+				ouvrirFenetre(new JIFStockVisiteur());
+			}
 		}
 
 	}
