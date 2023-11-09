@@ -6,13 +6,14 @@
  */
 package gsb.vue;
 
-import gsb.modele.Medecin;
+//import gsb.modele.Medecin;
 import gsb.modele.Visiteur;
 
 import java.awt.Container;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
+//import java.awt.event.ActionEvent;
 
+import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -54,6 +55,9 @@ public class JIFVisiteur extends JInternalFrame  {
     protected JTextField JTcodeUnite;
     protected JTextField JTnomUnite;
 	
+    protected JButton Valider;
+    protected JButton Vider;
+
     public JIFVisiteur() {
     	p = new JPanel();  // panneau principal de la fenêtre
         pBoutons = new JPanel();    // panneau supportant les boutons
@@ -104,7 +108,11 @@ public class JIFVisiteur extends JInternalFrame  {
          pTexte.add(JLcodeUnite);
          pTexte.add(JTcodeUnite);
          pTexte.add(JLnomUnite);
-         pTexte.add(JTnomUnite);		
+         pTexte.add(JTnomUnite);
+         Valider = new JButton("Valider");
+         Vider = new JButton("Vider");	
+         pBoutons.add(Valider);
+         pBoutons.add(Vider);
         // mise en forme de la fenêtre
 
          p.add(pTexte);
@@ -143,6 +151,55 @@ public class JIFVisiteur extends JInternalFrame  {
      }
 
 
+    /*
+    * Vérifie si tous les champs ont été correctement rempli
+    * Elle permet aussi de mettre en forme les champs
+    * @author Tallec--Even Léo
+    * @return true si tous les champs sont bons, false s'il y a un champ vide.
+    
+     public boolean verifChamps()
+     {
+         boolean verif = true;
+         // On vérifie qu'aucun champ n'est null
+         for (int i = 0; i < champs.size(); i++)
+         {
+             // A l'exception du champ potentiel car visiblement dans la base de données c'est vide par défaut.
+             if (champs.get(i).getText().isEmpty() == true && champs.get(i) != JTpotentiel)
+             {
+                 // S'il est null, return false et print index
+                 verif = false;
+                 System.out.println("Le champ à l'index numéro " + i + " est vide !");
+                 System.out.println(i + " : " + champs.get(i).getText());
+             }
+         }
+         // Mise en forme des champs
+         // Nom et prenom en majuscule
+         JTnom.setText(JTnom.getText().toUpperCase());
+         JTprenom.setText(JTprenom.getText().toUpperCase());
+         // Majuscule au début du nom de la ville
+         if (JTville.getText().isEmpty() == false)
+         {
+             JTville.setText(JTville.getText().substring(0 , 1).toUpperCase() + JTville.getText().substring(1));
+         }
+ 
+         // tirets automatiques dans le numero de telephone
+         if (JTtelephone.getText().length() == 10)
+         {
+             String ancienNumero = JTtelephone.getText();
+             StringBuilder numeroFormat = new StringBuilder();
+             for (int i = 0; i < ancienNumero.length(); i++)
+             {
+                 if (i % 2 == 0 && i > 0) 
+                 {
+                     numeroFormat.append('-');
+                 }
+                 numeroFormat.append(ancienNumero.charAt(i));
+             }
+             JTtelephone.setText(numeroFormat.toString());
+         }
+         
+         return verif;
+     }*/
     
 }
 
