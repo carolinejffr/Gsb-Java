@@ -57,7 +57,7 @@ public class JIFVisiteur extends JInternalFrame  {
     public JIFVisiteur() {
     	p = new JPanel();  // panneau principal de la fenêtre
         pBoutons = new JPanel();    // panneau supportant les boutons
-        pTexte = new JPanel(new GridLayout(9,2));
+        pTexte = new JPanel(new GridLayout(12,2));
     	
     	 JLmatricule = new JLabel("Matricule");
          JLnom = new JLabel("Nom");
@@ -72,13 +72,18 @@ public class JIFVisiteur extends JInternalFrame  {
          JLcodeUnite = new JLabel("Code Unite");
          JLnomUnite = new JLabel("Nom Unite");
          
+         
          JTmatricule = new JTextField(20);
          JTmatricule.setMaximumSize(JTmatricule.getPreferredSize());
          JTnom = new JTextField();
          JTprenom = new JTextField();
+         JTtelephone = new JTextField();
          JTadresse = new JTextField();    
          JTcp = new JTextField();
-         JTtelephone = new JTextField();
+         JTdateEntree = new JTextField();
+         JTprime = new JTextField();
+         JTcodeUnite = new JTextField();
+         JTnomUnite = new JTextField();
          
          pTexte.add(JLmatricule);
          pTexte.add(JTmatricule);
@@ -86,19 +91,20 @@ public class JIFVisiteur extends JInternalFrame  {
          pTexte.add(JTnom);
          pTexte.add(JLprenom);
          pTexte.add(JTprenom);
+         pTexte.add(JLtelephone);
+         pTexte.add(JTtelephone);
          pTexte.add(JLadresse);
          pTexte.add(JTadresse);
          pTexte.add(JLcp);
          pTexte.add(JTcp);
-         pTexte.add(JLville);
-         pTexte.add(JTville);
-         pTexte.add(JLtelephone);
-         pTexte.add(JTtelephone);
-         pTexte.add(JLpotentiel);
-         pTexte.add(JTpotentiel);
-         pTexte.add(JLspecialite);
-         pTexte.add(JTspecialite);
-		
+         pTexte.add(JLdateEntree);
+         pTexte.add(JTdateEntree);
+         pTexte.add(JLprime);
+         pTexte.add(JTprime);
+         pTexte.add(JLcodeUnite);
+         pTexte.add(JTcodeUnite);
+         pTexte.add(JLnomUnite);
+         pTexte.add(JTnomUnite);		
         // mise en forme de la fenêtre
 
          p.add(pTexte);
@@ -113,12 +119,13 @@ public class JIFVisiteur extends JInternalFrame  {
         JTmatricule.setText(unVisiteur.getMatricule());        
         JTnom.setText(unVisiteur.getNom());
         JTprenom.setText(unVisiteur.getPrenom());
+        JTtelephone.setText(unVisiteur.getAdresse());
         JTadresse.setText(unVisiteur.getAdresse());    
         JTcp.setText(unVisiteur.getLogin());
-        JTville.setText(unVisiteur.getMdp());
-        JTtelephone.setText(unVisiteur.getAdresse());
-        JTpotentiel.setText(unVisiteur.getUneLocalite());
-        JTspecialite.setText(unVisiteur.getSpecialite());
+        JTdateEntree.setText(unVisiteur.getDateEntree());
+        JTprime.setText(String.format("%d", unVisiteur.getPrime()));
+        JTcodeUnite.setText(unVisiteur.getCodeUnite());
+        JTnomUnite.setText(unVisiteur.getNomUnite());
      }
      
       public void viderText()
@@ -126,12 +133,13 @@ public class JIFVisiteur extends JInternalFrame  {
         JTmatricule.setText("");        
         JTnom.setText("");
         JTprenom.setText("");
+        JTtelephone.setText("");
         JTadresse.setText("");    
         JTcp.setText("");
-        JTville.setText("");
-        JTtelephone.setText("");
-        JTpotentiel.setText("");
-        JTspecialite.setText("");
+        JTdateEntree.setText("");
+        JTprime.setText("");
+        JTcodeUnite.setText("");
+        JTnomUnite.setText("");
      }
 
 
