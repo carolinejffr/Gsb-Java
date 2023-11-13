@@ -7,7 +7,7 @@
 package gsb.vue;
 
 import gsb.modele.Medecin;
-import gsb.modele.Medecin;
+import gsb.modele.dao.VisiteurDao;
 import gsb.modele.Visiteur;
 import gsb.modele.dao.ConnexionMySql;
 import gsb.modele.dao.MedecinDao;
@@ -204,7 +204,7 @@ public class JIFVisiteur extends JInternalFrame  {
         JTnomUnite.setText("");
      }
 
-      public int ajoutMedecinBDD()
+      public int ajoutVisiteurBDD()
     {
         int codeRequete = 0;
         // On commence par récupérer toutes les valeurs
@@ -219,44 +219,42 @@ public class JIFVisiteur extends JInternalFrame  {
                 StringChamps.set(i, StringChamps.get(i).replace("'", "\\'"));
             }
         }
-        
-        // On a besoin de générer le CodeMed.
-        ArrayList<Medecin> lesMedecins = MedecinDao.retournerCollectionDesMedecins();
-        int numCode = lesMedecins.size() + 1;
-        String codeMed = ("m" + String.format("%03d", numCode));
-        System.out.println(codeMed);
 
         // Le champ à l'index 3 contient la ville. Hors, nous avons besoin du code postal !
-        String leCodePostal = LocaliteService.getCodePostal(StringChamps.get(3));
+        String leCodePostal = LocaliteService.getCodePostal(StringChamps.get(7));
         
 
         // On créé la requête SQL. J'utilise String.format car je trouve ça plus lisible quand il y a autant de variables.
-        String laRequete = String.format("INSERT INTO `VISITEUR` (`MATRICULE`, `NOM`, `PRENOM`,`LOGIN`,`MDP`,`TELEPHONE`, `ADRESSE`, `CODEPOSTAL`, `DATEENTRE`, `CODEUNIT`,`NOMUNIT`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s','%s','%s');",
-         codeMed,
-         StringChamps.get(0),
-         StringChamps.get(1),
-         StringChamps.get(2),
-         leCodePostal,
-         StringChamps.get(4),
-         StringChamps.get(5),
-         StringChamps.get(6));
+        String laRequete = String.format("INSERT INTO `VISITEUR` (`MATRICULE`, `NOM`, `PRENOM`,`LOGIN`,`MDP`,`TELEPHONE`, `ADRESSE`, `CODEPOSTAL`, `DATEENTRE`, `CODEUNIT`,`NOMUNIT`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s','%s');",
+         StringChamps.get(0),//Matricule
+         StringChamps.get(1),//Nom
+         StringChamps.get(2),//Prenom
+         StringChamps.get(3),//Login
+         StringChamps.get(4),//Mdp
+         StringChamps.get(5),//Telephone
+         StringChamps.get(6),//Adresse
+         leCodePostal,//Code Postal
+         StringChamps.get(8),//Date Entrée
+         StringChamps.get(9),//Code Unit
+         StringChamps.get(10));//Nom Unit
 
         System.out.println(laRequete);
         int reqMaj = ConnexionMySql.execReqMaj(laRequete);
         ConnexionMySql.fermerConnexionBd();
 
-        // Si la requête a aboutie, on ajoute le médecin en local.
+        
+        // Si la requête a aboutie, on ajoute le visiteur en local.
         if (reqMaj == 1)
         {
             codeRequete = 1;
-            Medecin leMedecin = MedecinDao.rechercher(codeMed);
-            if (leMedecin != null)
+            Visiteur leVisiteur = VisiteurDao.rechercher(StringChamps.get(0));
+            if (leVisiteur != null)
             {
                 codeRequete = 2;
             }
         }
         
-        return codeRequete;
+        return codeRequete; 
     }
     
 }
