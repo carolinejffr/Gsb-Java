@@ -206,6 +206,7 @@ public class JIFVisiteur extends JInternalFrame  {
 
       public int ajoutVisiteurBDD()
     {
+        
         int codeRequete = 0;
         // On commence par récupérer toutes les valeurs
         ArrayList<String> StringChamps = new ArrayList<String>();
@@ -241,7 +242,6 @@ public class JIFVisiteur extends JInternalFrame  {
         System.out.println(laRequete);
         int reqMaj = ConnexionMySql.execReqMaj(laRequete);
         ConnexionMySql.fermerConnexionBd();
-
         
         // Si la requête a aboutie, on ajoute le visiteur en local.
         if (reqMaj == 1)
