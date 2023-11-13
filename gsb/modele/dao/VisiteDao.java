@@ -5,6 +5,12 @@ import java.util.ArrayList;
 
 import gsb.modele.Visite;
 
+/**
+ * Dao Visite
+ * 
+ * @author Gouault Lucas
+ * @author Caroline Jaffré
+ */
 public class VisiteDao {
     /**
      * Recherche une visite dans la base à partir d'un identifiant

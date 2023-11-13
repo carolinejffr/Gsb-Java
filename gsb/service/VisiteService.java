@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import gsb.modele.Visite;
 import gsb.modele.dao.VisiteDao;
 
+/**
+ * Service Visite
+ * 
+ * @author Gouault Lucas
+ */
 public class VisiteService {
     /**
      * Renvoie la liste des visiteurs de la base

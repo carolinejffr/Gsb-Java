@@ -16,8 +16,9 @@ import javax.swing.JTextField;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
-/*
+/**
  * Vue Ajout Visite
+ * 
  * @author Gouault Lucas
  */
 public class JIFVisiteAjout extends JInternalFrame  implements ActionListener 
