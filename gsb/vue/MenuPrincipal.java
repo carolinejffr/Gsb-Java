@@ -156,6 +156,16 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			{
 				ouvrirFenetre(new JIFStockVisiteur());
 			}
+
+			// Ajouts perso -Lucas
+			else if(ChoixOption.equals("Ajout Visite"))
+			{
+				ouvrirFenetre(new JIFVisiteAjout());
+			}
+			else if(ChoixOption.equals("Consultation Visite"))
+			{
+				//ouvrirFenetre(new JIFVisiteConsultation());
+			}
 		}
 
 	}
