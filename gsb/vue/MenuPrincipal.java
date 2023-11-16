@@ -87,6 +87,9 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		JMenuItem mA2 = new JMenuItem("Ajout Visite");
 		mA2.addActionListener(this);
 		mVisites.add(mA2);
+		JMenuItem mA3 = new JMenuItem("Mise à jour Visite");
+		mA3.addActionListener(this);
+		mVisites.add(mA3);
 
 		mVisiteurs = new JMenu("Visiteurs");
 		JMenuItem mV1 = new JMenuItem("Liste Visiteurs");

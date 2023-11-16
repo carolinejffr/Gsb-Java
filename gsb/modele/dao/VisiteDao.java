@@ -2,7 +2,6 @@ package gsb.modele.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
 import gsb.modele.Visite;
 
 /**
@@ -88,5 +87,25 @@ public class VisiteDao {
 
         ConnexionMySql.fermerConnexionBd();
         return retour;
+    }
+      
+    public static ArrayList<Visite> retournerLesVisites()
+    {
+        ArrayList<Visite> lesVisites = new ArrayList<Visite>();
+        ResultSet reqSelection = ConnexionMySql.execReqSelection("select REFERENCE from VISITE");
+        try 
+        {
+             while (reqSelection.next()) 
+            {
+                String refVisite = reqSelection.getString(1);
+                lesVisites.add(VisiteDao.rechercher(refVisite));
+            }
+        } 
+        catch (Exception e) 
+        {
+           e.printStackTrace();
+           System.out.println("Erreur : retournerLesVisites()");
+        }
+        return lesVisites;
     }
 }
