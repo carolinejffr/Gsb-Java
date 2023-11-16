@@ -2,3 +2,4 @@
 gsb/modele/dao/ConnexionMySql.java
 .vscode/settings.json
 lib/junit-platform-console-standalone-1.9.3.jar
+.vscode/launch.json

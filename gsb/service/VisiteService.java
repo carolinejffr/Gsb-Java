@@ -38,7 +38,7 @@ public class VisiteService {
      * @param  uneVisite  La visite à ajouter
      * @return            0 => Erreur, 1 => OK
      */
-    public static int ajouterVisite(Visite uneVisite) {
+    public static int ajouter(Visite uneVisite) {
         return VisiteDao.ajouter(uneVisite);
     }
 
