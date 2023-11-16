@@ -1,15 +1,13 @@
 package gsb.vue;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
-import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -17,9 +15,7 @@ import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.table.DefaultTableModel;
 import gsb.modele.Stocker;
-import gsb.modele.Visiteur;
 import gsb.modele.dao.StockDao;
-import gsb.modele.dao.VisiteurDao;
 import gsb.service.StockService;
 import gsb.service.VisiteurService;
 
@@ -27,7 +23,7 @@ import gsb.service.VisiteurService;
  * Vue Consulter le Stock d'un visiteur
  * @author Caroline Jaffré
  */
-public class JIFStockVisiteur extends JIFMedecin  implements ActionListener 
+public class JIFStockVisiteur extends JInternalFrame  implements ActionListener 
 {
     // Panels
     protected JPanel p;  
@@ -42,7 +38,7 @@ public class JIFStockVisiteur extends JIFMedecin  implements ActionListener
 
     public JIFStockVisiteur()
     {
-        // J'ai choisi le BorderLayour pour coller à la maquette
+        // J'ai choisi le BorderLayout pour coller à la maquette
         p = new JPanel(new BorderLayout());  // panneau principal de la fenêtre
         pCode = new JPanel();
         JLcodeVisiteur = new JLabel("Code Visiteur");
