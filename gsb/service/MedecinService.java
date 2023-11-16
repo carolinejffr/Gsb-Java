@@ -1,8 +1,6 @@
 /*
  * Créé le 23 févr. 2015
  *
- * TODO Pour changer le modèle de ce fichier généré, allez à :
- * Fenêtre - Préférences - Java - Style de code - Modèles de code
  */
 package gsb.service;
 
@@ -12,8 +10,6 @@ import gsb.modele.dao.MedecinDao;
 /**
  * @author Isabelle
  * 23 févr. 2015
- * TODO Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre - Préférences - Java - Style de code - Modèles de code
  */
 public class MedecinService {
 	

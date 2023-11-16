@@ -2,8 +2,6 @@ package gsb.modele.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
-import gsb.modele.Localite;
 import gsb.modele.Medecin;
 import gsb.modele.Visite;
 import gsb.modele.Visiteur;

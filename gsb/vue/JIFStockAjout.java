@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,7 +25,7 @@ import gsb.service.VisiteurService;
  * Vue Ajout Stock (dans Visiteur)
  * @author Caroline Jaffré
  */
-public class JIFStockAjout extends JIFMedecin  implements ActionListener 
+public class JIFStockAjout extends JInternalFrame  implements ActionListener 
 {
     // Panels
     protected JPanel p;  
