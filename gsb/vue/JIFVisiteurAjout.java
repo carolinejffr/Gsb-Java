@@ -28,15 +28,30 @@ public class JIFVisiteurAjout extends JIFVisiteur implements ActionListener {
     }
     public void actionPerformed(ActionEvent evenement) 
     { 
-        { 
+        
             Object source = evenement.getSource();
             if (source == vider)
             {
                 viderText();
             }
             else if (source == ajouter){
-                boolean verification = verifChamps();
-                if verification = 1
+                boolean verification = true;
+                //verification = verifChamps();
+
+                if (verification = true){
+                    int codeRequete = ajoutVisiteurBDD();
+                    if (codeRequete == 0){
+                        Localite laLocalite = testLocalite();
+                        if (laLocalite == null){
+                            labelErreur.setText("<html>La ville indiquée n'existe pas dans la base de données.<br/>Veuillez l'ajouter avant de réessayer.</html>");
+                        }
+                        else{
+                            boolean temp = verification ; 
+                            labelErreur.setText("<html>Erreur a implémenté </html>");
+                        }
+                    }
+                }
             }
+    
     }
 }

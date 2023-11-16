@@ -6,16 +6,16 @@
  */
 package gsb.vue;
 
-import gsb.modele.Medecin;
+import gsb.modele.Localite;
 import gsb.modele.dao.VisiteurDao;
 import gsb.modele.Visiteur;
 import gsb.modele.dao.ConnexionMySql;
-import gsb.modele.dao.MedecinDao;
+import gsb.modele.dao.LocaliteDao;
 import gsb.service.LocaliteService;
 
 import java.awt.Container;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
+//import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -39,7 +39,7 @@ public class JIFVisiteur extends JInternalFrame  {
 	protected JLabel JLprenom;
     protected JLabel JLlogin;
     protected JLabel JLmdp;
-    protected JLabel JLtelephone;
+//    protected JLabel JLtelephone;
 	protected JLabel JLadresse;
     protected JLabel JLcp;
     protected JLabel JLdateEntree;
@@ -52,7 +52,7 @@ public class JIFVisiteur extends JInternalFrame  {
 	protected JTextField JTprenom;
     protected JTextField JTlogin;
     protected JTextField JTmdp;
-    protected JTextField JTtelephone;
+//    protected JTextField JTtelephone;
 	protected JTextField JTadresse;
     protected JTextField JTcp;
     protected JTextField JTdateEntree;
@@ -75,7 +75,7 @@ public class JIFVisiteur extends JInternalFrame  {
          JLmdp = new JLabel("Mot De Passe");
          JLadresse = new JLabel("Adresse rue");
          JLcp = new JLabel("Code postal");
-         JLtelephone = new JLabel("Téléphone");
+        // JLtelephone = new JLabel("Téléphone");
          JLadresse = new JLabel("Adresse");
          JLcp = new JLabel("Code Postal");
          JLdateEntree = new JLabel("Date Entrée");
@@ -90,7 +90,7 @@ public class JIFVisiteur extends JInternalFrame  {
          JTprenom = new JTextField();
          JTlogin = new JTextField();
          JTmdp = new JTextField();
-         JTtelephone = new JTextField();
+         //JTtelephone = new JTextField();
          JTadresse = new JTextField();    
          JTcp = new JTextField();
          JTdateEntree = new JTextField();
@@ -108,8 +108,8 @@ public class JIFVisiteur extends JInternalFrame  {
          pTexte.add(JTlogin);
          pTexte.add(JLmdp);
          pTexte.add(JTmdp);
-         pTexte.add(JLtelephone);
-         pTexte.add(JTtelephone);
+        // pTexte.add(JLtelephone);
+        // pTexte.add(JTtelephone);
          pTexte.add(JLadresse);
          pTexte.add(JTadresse);
          pTexte.add(JLcp);
@@ -132,13 +132,13 @@ public class JIFVisiteur extends JInternalFrame  {
          p.add(pBoutons);
          Container contentPane = getContentPane();
          contentPane.add(p);
-        // Ajout d'une liste pour faciliter la verifChamps -Caroline
+        // Ajout d'une liste pour faciliter la verifChamps 
         champs = new ArrayList<JTextField>();
          champs.add(JTnom);
          champs.add(JTprenom);
          champs.add(JTlogin);
          champs.add(JTmdp);
-         champs.add(JTtelephone);
+        // champs.add(JTtelephone);
          champs.add(JTadresse);
          champs.add(JTcp);
          champs.add(JTdateEntree);
@@ -156,8 +156,8 @@ public class JIFVisiteur extends JInternalFrame  {
          pTexte.add(JTlogin);
          pTexte.add(JLmdp);         
          pTexte.add(JTmdp);
-         pTexte.add(JLtelephone);     
-         pTexte.add(JTtelephone);
+        // pTexte.add(JLtelephone);     
+       //  pTexte.add(JTtelephone);
          pTexte.add(JLadresse);
          pTexte.add(JTadresse);
          pTexte.add(JLcp);
@@ -179,7 +179,7 @@ public class JIFVisiteur extends JInternalFrame  {
         JTprenom.setText(unVisiteur.getPrenom());
         JTlogin.setText(unVisiteur.getLogin());
         JTmdp.setText(unVisiteur.getMdp());
-        JTtelephone.setText(unVisiteur.getAdresse());
+        //JTtelephone.setText(unVisiteur.getAdresse());
         JTadresse.setText(unVisiteur.getAdresse());    
         JTcp.setText(unVisiteur.getLogin());
         JTdateEntree.setText(unVisiteur.getDateEntree());
@@ -190,20 +190,26 @@ public class JIFVisiteur extends JInternalFrame  {
      
       public void viderText()
     {  // méthode qui permet de vider les zones de texte 
-        JTmatricule.setText("");        
-        JTnom.setText("");
-        JTprenom.setText("");
-        JTlogin.setText("");
-        JTmdp.setText("");
-        JTtelephone.setText("");
-        JTadresse.setText("");    
-        JTcp.setText("");
-        JTdateEntree.setText("");
+        JTmatricule.setText("Billy");        
+        JTnom.setText("Billy");
+        JTprenom.setText("Billy");
+        JTlogin.setText("Billy");
+        JTmdp.setText("Billy");
+        //JTtelephone.setText("");
+        JTadresse.setText("12 Billy rue billy a billy land ");    
+        JTcp.setText("69690");
+        JTdateEntree.setText("2000-05-01 00:00:00");
         JTprime.setText("");
         JTcodeUnite.setText("");
         JTnomUnite.setText("");
      }
+    public Localite testLocalite()
+    {
+        Localite laLocalite = null;
+        laLocalite = LocaliteDao.rechercher(JTcp.getText());
 
+        return laLocalite;
+    }
       public int ajoutVisiteurBDD()
     {
         
@@ -226,13 +232,13 @@ public class JIFVisiteur extends JInternalFrame  {
         
 
         // On créé la requête SQL. J'utilise String.format car je trouve ça plus lisible quand il y a autant de variables.
-        String laRequete = String.format("INSERT INTO `VISITEUR` (`MATRICULE`, `NOM`, `PRENOM`,`LOGIN`,`MDP`,`TELEPHONE`, `ADRESSE`, `CODEPOSTAL`, `DATEENTRE`, `CODEUNIT`,`NOMUNIT`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s','%s');",
+        String laRequete = String.format("INSERT INTO `VISITEUR` (`MATRICULE`, `NOM`, `PRENOM`,`LOGIN`,`MDP`, `ADRESSE`, `CODEPOSTAL`, `DATEENTRE`, `CODEUNIT`,`NOMUNIT`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s','%s','%s');",
          StringChamps.get(0),//Matricule
          StringChamps.get(1),//Nom
          StringChamps.get(2),//Prenom
          StringChamps.get(3),//Login
          StringChamps.get(4),//Mdp
-         StringChamps.get(5),//Telephone
+         //StringChamps.get(5),//Telephone
          StringChamps.get(6),//Adresse
          leCodePostal,//Code Postal
          StringChamps.get(8),//Date Entrée
