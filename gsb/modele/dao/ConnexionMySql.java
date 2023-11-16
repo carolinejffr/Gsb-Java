@@ -48,7 +48,7 @@ public class ConnexionMySql { // DAO = Data Access Object
 		ResultSet resultatReq = null;
 		try {
 				Statement requete = cnx.createStatement(); 
-				resultatReq =requete.executeQuery(laRequete); 
+				resultatReq = requete.executeQuery(laRequete); 
 		} 
 		catch(Exception e) {  System.out.println("Erreur requete : "+laRequete);  }
 		return resultatReq;	
@@ -61,15 +61,17 @@ public class ConnexionMySql { // DAO = Data Access Object
 	 */
 	public static int execReqMaj(String laRequete){
 		connecterBd();
-		int nbMaj =0;
+		int nbMaj = 0;
 		try {
-		Statement s = cnx.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-        nbMaj = s.executeUpdate(laRequete);
-        s.close();}
+			Statement s = cnx.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+        	nbMaj = s.executeUpdate(laRequete);
+        	s.close();
+		}
 		catch (Exception er) {
-			er.printStackTrace(); 
-			System.out.println("echec requête : "+laRequete); }
-		return nbMaj;       
+			er.printStackTrace();
+			System.out.println("echec requête : "+laRequete);
+		}
+		return nbMaj;
 	}
 	
 	/**
