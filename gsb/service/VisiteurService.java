@@ -9,7 +9,7 @@ import gsb.modele.dao.VisiteurDao;
  */
 public class VisiteurService 
 {
-    public static ArrayList<String> getListeVisiteurs()
+     public static ArrayList<String> getListeVisiteurs()
     {
         ArrayList<String> laListe = new ArrayList<String>();
 		try
@@ -24,9 +24,5 @@ public class VisiteurService
 			System.out.println( e.getMessage());
 		}
 		return laListe;
-	}   
-    
-    public static Visiteur rechercher(String unMatricule) {
-        return VisiteurDao.rechercher(unMatricule);
-    }
+	}    
 }

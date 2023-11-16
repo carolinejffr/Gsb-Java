@@ -4,8 +4,6 @@
  */
 package gsb.service;
 
-import java.util.ArrayList;
-
 import gsb.modele.Medecin;
 import gsb.modele.dao.MedecinDao;
 
@@ -28,9 +26,5 @@ public class MedecinService {
 		}
 		return unMedecin;
 	}
-
-    public static ArrayList<Medecin> retournerCollectionDesMedecins() {
-        return MedecinDao.retournerCollectionDesMedecins();
-    }
 	
 }
