@@ -158,7 +158,8 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			}
 			else if (ChoixOption.equals("Ajout Visiteur")) 
 			{
-				ouvrirFenetre(new JIFVisiteur());
+				//Léo
+				ouvrirFenetre(new JIFVisiteurAjout());
 			}
 		}
 
