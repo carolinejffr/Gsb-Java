@@ -68,7 +68,7 @@ public class JIFVisiteurAjout extends JIFVisiteur implements ActionListener {
                             boolean temp = verification ; 
                             
                             }
-                            labelErreur.setText("<html>Erreur a implémenté </html>");
+                            labelErreur.setText("<html>Erreur à implémenter </html>");
                         }
                     }
                 }

@@ -209,22 +209,16 @@ public class JIFVisiteur extends JInternalFrame  {
             }
         }
 
-        // Le champ à l'index 3 contient la ville. Hors, nous avons besoin du code postal !
-        //TODO Corriger ici ! 
-        String leCodePostal = LocaliteService.getCodePostal(StringChamps.get(6));
-        
-
         // On créé la requête SQL. J'utilise String.format car je trouve ça plus lisible quand il y a autant de variables.
         String laRequete = String.format("INSERT INTO `VISITEUR` (`MATRICULE`, `NOM`, `PRENOM`,`LOGIN`,`MDP`, `ADRESSE`, `CODEPOSTAL`, `DATEENTREE`, `CODEUNIT`,`NOMUNIT`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s','%s','%s','%s');",
 
-         StringChamps.get(1),//Matricule
-         StringChamps.get(2),//Nom
-         StringChamps.get(3),//Prenom
-         StringChamps.get(4),//Login
-         StringChamps.get(5),//Mdp
-         //StringChamps.get(5),//Telephone
-         StringChamps.get(6),//Adresse
-         46000,//Code Postal
+         StringChamps.get(0),//Matricule
+         StringChamps.get(1),//Nom
+         StringChamps.get(2),//Prenom
+         StringChamps.get(3),//Login
+         StringChamps.get(4),//Mdp
+         StringChamps.get(5),//Adresse
+         StringChamps.get(6),//Code Postal
          StringChamps.get(7),//Date Entrée
          StringChamps.get(8),//Code Unit
          StringChamps.get(9));//Nom Unit

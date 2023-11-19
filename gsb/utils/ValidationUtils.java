@@ -1,5 +1,5 @@
 /*
- * Cr�� le 29 oct. 2014
+ * Créé le 29 oct. 2014
  *
  */
 package gsb.utils;
