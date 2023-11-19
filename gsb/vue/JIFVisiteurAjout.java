@@ -57,18 +57,23 @@ public class JIFVisiteurAjout extends JIFVisiteur implements ActionListener {
                 boolean verification = true;
                 //verification = verifChamps();
 
-                if (verification = true){
+                if (verification == true){
                     int codeRequete = ajoutVisiteurBDD();
                     if (codeRequete == 0){
                         Localite laLocalite = testLocalite();
+                        System.out.println("dans Verification : "+laLocalite);
                         if (laLocalite == null){
-                            labelErreur.setText("<html>La ville indiquée n'existe pas dans la base de données.<br/>Veuillez l'ajouter avant de réessayer.</html>");
+                            labelErreur.setText("<html>Le code postal indiquée n'existe pas dans la base de données.<br/>Veuillez l'ajouter avant de réessayer.</html>");
+                            verification = false;
+                        }
+                        else if (verifMatricule()) {
+                            labelErreur.setText("<html>le Matricule existe déja </html>");
                         }
                         else{
-                            boolean temp = verification ; 
-                            
-                            }
+                            //if( testLongueur() == true){}  
                             labelErreur.setText("<html>Erreur à implémenter </html>");
+                            }
+
                         }
                     }
                 }

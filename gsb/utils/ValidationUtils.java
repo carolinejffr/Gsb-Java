@@ -25,7 +25,7 @@ public class ValidationUtils {
     }
 
     public static boolean isTelephoneValide(String telephone) {
-    	// num�ro de t�l�phone sous la forme XXXXXXXXXX ou XX XX XX XX XX ou XX-XX-XX-XX-XX ou XX.XX.XX.XX.XX
+    	// numéro de téléphone sous la forme XXXXXXXXXX ou XX XX XX XX XX ou XX-XX-XX-XX-XX ou XX.XX.XX.XX.XX
     	Pattern p = Pattern.compile("^0[1-9]([-. ]?[0-9]{2}){4}$");
     	Matcher m = p.matcher(telephone.toUpperCase());
     	return m.matches();
