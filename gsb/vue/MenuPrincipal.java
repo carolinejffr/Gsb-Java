@@ -1,8 +1,6 @@
 /*
  * Créé le 22 févr. 2015
  *
- * TODO Pour changer le modèle de ce fichier généré, allez à :
- * Fenêtre - Préférences - Java - Style de code - Modèles de code
  */
 package gsb.vue;
 
@@ -20,9 +18,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 /**
- * @author Isabelle 22 févr. 2015 TODO Pour changer le modèle de ce commentaire
- *         de type généré, allez à : Fenêtre - Préférences - Java - Style de
- *         code - Modèles de code
+ * @author Isabelle 
+ * 22 févr. 2015 
  */
 public class MenuPrincipal extends JFrame implements ActionListener {
 
@@ -87,6 +84,9 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		JMenuItem mA2 = new JMenuItem("Ajout Visite");
 		mA2.addActionListener(this);
 		mVisites.add(mA2);
+		JMenuItem mA3 = new JMenuItem("Mise a jour Visite");
+		mA3.addActionListener(this);
+		mVisites.add(mA3);
 
 		mVisiteurs = new JMenu("Visiteurs");
 		JMenuItem mV1 = new JMenuItem("Liste Visiteurs");
@@ -155,12 +155,28 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			else if (ChoixOption.equals("Stock Echantillons Visiteur")) 
 			{
 				ouvrirFenetre(new JIFStockVisiteur());
-			}
+			}			
 			else if (ChoixOption.equals("Ajout Visiteur")) 
 			{
 				//Léo
 				ouvrirFenetre(new JIFVisiteurAjout());
 			}
+      		else if (ChoixOption.equals("Mise a jour Visite")) 
+			{
+				ouvrirFenetre(new JIFVisiteModif());
+			}
+      
+      
+			// Ajouts perso -Lucas
+			else if(ChoixOption.equals("Ajout Visite"))
+			{
+				ouvrirFenetre(new JIFVisiteAjout());
+			}
+			else if(ChoixOption.equals("Consultation Visite"))
+			{
+				//ouvrirFenetre(new JIFVisiteConsultation());
+      }
+			
 		}
 
 	}

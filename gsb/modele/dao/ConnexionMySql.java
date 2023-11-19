@@ -3,9 +3,6 @@ package gsb.modele.dao;
 
 /*
  * Créé le 23 sept. 2014
- *
- * TODO Pour changer le modèle de ce fichier généré, allez à :
- * Fenêtre - Préférences - Java - Style de code - Modèles de code
  */
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,8 +12,6 @@ import java.sql.Statement;
 /**
  * @author Isabelle
  * 23 sept. 2014
- * TODO Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre - Préférences - Java - Style de code - Modèles de code
  */
 public class ConnexionMySql { // DAO = Data Access Object
 	
@@ -53,7 +48,7 @@ public class ConnexionMySql { // DAO = Data Access Object
 		ResultSet resultatReq = null;
 		try {
 				Statement requete = cnx.createStatement(); 
-				resultatReq =requete.executeQuery(laRequete); 
+				resultatReq = requete.executeQuery(laRequete); 
 		} 
 		catch(Exception e) {  System.out.println("Erreur requete : "+laRequete);  }
 		return resultatReq;	
@@ -66,15 +61,17 @@ public class ConnexionMySql { // DAO = Data Access Object
 	 */
 	public static int execReqMaj(String laRequete){
 		connecterBd();
-		int nbMaj =0;
+		int nbMaj = 0;
 		try {
-		Statement s = cnx.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-        nbMaj = s.executeUpdate(laRequete);
-        s.close();}
+			Statement s = cnx.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+        	nbMaj = s.executeUpdate(laRequete);
+        	s.close();
+		}
 		catch (Exception er) {
-			er.printStackTrace(); 
-			System.out.println("echec requête : "+laRequete); }
-		return nbMaj;       
+			er.printStackTrace();
+			System.out.println("echec requête : "+laRequete);
+		}
+		return nbMaj;
 	}
 	
 	/**
