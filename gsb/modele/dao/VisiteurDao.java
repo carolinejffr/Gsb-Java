@@ -3,8 +3,10 @@ package gsb.modele.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import gsb.modele.Localite;
+import gsb.modele.Medecin;
 import gsb.modele.Visiteur;
 /*
  * @author Caroline Jaffré
@@ -45,5 +47,20 @@ public class VisiteurDao {
 			System.out.println("erreur retournerCollectionDesVisiteurs()");
 		}
 		return collectionDesVisiteurs;
+	}
+		public static HashMap<String,Visiteur> retournerDictionnaireDesMedecins(){
+			HashMap<String, Visiteur> diccoDesVisiteurs = new HashMap<String, Visiteur>();
+			ResultSet reqSelection = ConnexionMySql.execReqSelection("select MATRICULE from VISITEUR");
+			try{
+				while (reqSelection.next()) {
+						String matricule = reqSelection.getString(1);
+						diccoDesVisiteurs.put(matricule, VisiteurDao.rechercher(matricule));
+					}
+				}
+			catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("erreur retournerDiccoDesMedecins()");
+			}
+			return diccoDesVisiteurs;
 	}
 }
