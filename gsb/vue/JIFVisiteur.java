@@ -11,17 +11,13 @@ import gsb.modele.dao.VisiteurDao;
 import gsb.modele.Visiteur;
 import gsb.modele.dao.ConnexionMySql;
 import gsb.modele.dao.LocaliteDao;
-//import gsb.service.LocaliteService;
-//import gsb.service.VisiteurService;
 import gsb.utils.ValidationUtils;
 
 import java.awt.Container;
 import java.awt.GridLayout;
-//import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
-//import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -41,26 +37,18 @@ public class JIFVisiteur extends JInternalFrame {
     protected JLabel JLprenom;
     protected JLabel JLlogin;
     protected JLabel JLmdp;
-    // protected JLabel JLtelephone;
     protected JLabel JLadresse;
     protected JLabel JLcp;
     protected JLabel JLdateEntree;
-    // protected JLabel JLprime;
-    //protected JLabel JLcodeUnite;
-    //protected JLabel JLnomUnite;
 
     protected JTextField JTmatricule;
     protected JTextField JTnom;
     protected JTextField JTprenom;
     protected JTextField JTlogin;
     protected JTextField JTmdp;
-    // protected JTextField JTtelephone;
     protected JTextField JTadresse;
     protected JTextField JTcp;
     protected JTextField JTdateEntree;
-    // protected JTextField JTprime;
-   // protected JTextField JTcodeUnite;
-    //protected JTextField JTnomUnite;
     protected ArrayList<JTextField> champs;
     protected JComboBox<String> JCCodeUnite;
     
@@ -77,13 +65,9 @@ public class JIFVisiteur extends JInternalFrame {
         JLmdp = new JLabel("Mot De Passe");
         JLadresse = new JLabel("Adresse rue");
         JLcp = new JLabel("Code postal");
-        // JLtelephone = new JLabel("Téléphone");
         JLadresse = new JLabel("Adresse");
         JLcp = new JLabel("Code Postal");
-        JLdateEntree = new JLabel("Date Entrée au Format 00-00-0000 00:00:00");
-        // JLprime = new JLabel("Prime");
-        //JLcodeUnite = new JLabel("Code Unite");
-        //JLnomUnite = new JLabel("Nom Unite");
+        JLdateEntree = new JLabel("Date Entrée au Format 0000-00-00 00:00:00");
 
         JTmatricule = new JTextField(20);
         JTmatricule.setMaximumSize(JTmatricule.getPreferredSize());
@@ -91,14 +75,11 @@ public class JIFVisiteur extends JInternalFrame {
         JTprenom = new JTextField();
         JTlogin = new JTextField();
         JTmdp = new JTextField();
-        // JTtelephone = new JTextField();
         JTadresse = new JTextField();
         JTcp = new JTextField();
         JTdateEntree = new JTextField();
-        // JTprime = new JTextField();
         JCCodeUnite = new JComboBox<String>();
-        //JTcodeUnite = new JTextField();
-        //JTnomUnite = new JTextField();
+
 
         pTexte.add(JLmatricule);
         pTexte.add(JTmatricule);
@@ -110,19 +91,14 @@ public class JIFVisiteur extends JInternalFrame {
         pTexte.add(JTlogin);
         pTexte.add(JLmdp);
         pTexte.add(JTmdp);
-        // pTexte.add(JLtelephone);
-        // pTexte.add(JTtelephone);
+
         pTexte.add(JLadresse);
         pTexte.add(JTadresse);
         pTexte.add(JLcp);
         pTexte.add(JTcp);
         pTexte.add(JLdateEntree);
         pTexte.add(JTdateEntree);
-        // pTexte.add(JLprime);
-        // pTexte.add(JTprime);
-        //pTexte.add(JLcodeUnite);
-        //pTexte.add(JLnomUnite);
-        //pTexte.add(JTnomUnite);
+
         // mise en forme de la fenêtre
 
         p.add(pTexte);
@@ -153,37 +129,26 @@ public class JIFVisiteur extends JInternalFrame {
         pTexte.add(JTlogin);
         pTexte.add(JLmdp);
         pTexte.add(JTmdp);
-        // pTexte.add(JLtelephone);
-        // pTexte.add(JTtelephone);
         pTexte.add(JLadresse);
         pTexte.add(JTadresse);
         pTexte.add(JLcp);
         pTexte.add(JTcp);
         pTexte.add(JLdateEntree);
         pTexte.add(JTdateEntree);
-        // pTexte.add(JLprime);
-        // pTexte.add(JTprime);
         pTexte.add(JCCodeUnite);
-        //pTexte.add(JLcodeUnite);
-        //pTexte.add(JTcodeUnite);
-        //pTexte.add(JLnomUnite);
-        //pTexte.add(JTnomUnite);
         JCCodeUnite.addItem("BO");
         JCCodeUnite.addItem("SW");
     }
 
     public void viderText() { // méthode qui permet de vider les zones de texte
-        JTmatricule.setText("t93");
-        JTnom.setText("Nom");
-        JTprenom.setText("Prenom");
-        JTlogin.setText("Login");
-        JTmdp.setText("MDP");
-        // JTtelephone.setText("");
-        JTadresse.setText("12 Billy rue billy a billy land ");
-        JTcp.setText("46123");
-        JTdateEntree.setText("2000-05-01 00:00:00");
-        // JTprime.setText("20");
-        //JTnomUnite.setText("BOURDIN");
+        JTmatricule.setText("");
+        JTnom.setText("");
+        JTprenom.setText("");
+        JTlogin.setText("");
+        JTmdp.setText("");
+        JTadresse.setText("");
+        JTcp.setText("");
+        JTdateEntree.setText("");
     }
 
     public Localite testLocalite() {
@@ -317,8 +282,8 @@ public class JIFVisiteur extends JInternalFrame {
                 StringChamps.get(6), // Code Postal
                 StringChamps.get(7), // Date Entrée
                 JCCodeUnite.getSelectedItem(),//
-                NomUnit // Code Unit
-                );// Nom Unit
+                NomUnit 
+                );
 
         System.out.println(laRequete);
         int reqMaj = ConnexionMySql.execReqMaj(laRequete);

@@ -6,8 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.event.InternalFrameAdapter;
-import javax.swing.event.InternalFrameEvent;
 
 import gsb.modele.Localite;
 
@@ -80,7 +78,7 @@ public class JIFVisiteurAjout extends JIFVisiteur implements ActionListener {
                     }
                     else{
                         //if( testLongueur() == true){}  
-                        labelErreur.setText("<html> Erreur à implémenter </html>");
+                        labelErreur.setText("<html> Injection reussi </html>");
                     }
                     
                 }
