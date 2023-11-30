@@ -4,6 +4,8 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
@@ -12,6 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+import gsb.service.MedecinService;
+import gsb.service.MedicamentService;
+import gsb.service.VisiteurService;
 
 /*
  * JIFVisiteModif - fenêtre de modification d'une visite
@@ -68,10 +73,21 @@ public class JIFVisiteModif extends JInternalFrame implements ActionListener
         modifier = new JButton("Modifier");
 
 
-        // TODO Placeholder
-        JCReference.addItem("a");
-        JCMatricule.addItem("a");
-        JCCodeMedecin.addItem("a");
+        ArrayList<String> references = MedicamentService.getListeMedicaments();
+        for (String referene : references)
+        {
+            JCMatricule.addItem(referene);
+        }
+        ArrayList<String> matricules = VisiteurService.listeMatricules();
+        for (String matricule : matricules)
+        {
+            JCMatricule.addItem(matricule);
+        }
+        ArrayList<String> codeMedecins = MedecinService.listeCodesMedecin();
+        for (String codeMedecin : codeMedecins)
+        {
+            JCCodeMedecin.addItem(codeMedecin);
+        }
 
         pTexte.add(JLReference);
         pTexte.add(JCReference);
