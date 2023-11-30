@@ -151,6 +151,18 @@ public class JIFVisiteur extends JInternalFrame {
         JTdateEntree.setText("");
     }
 
+    public void remplirText(Visiteur unVisiteur) { // méthode qui permet de vider les zones de texte
+        JTmatricule.setText(unVisiteur.getMatricule());
+        JTnom.setText(unVisiteur.getNom());
+        JTprenom.setText(unVisiteur.getPrenom());
+        JTlogin.setText(unVisiteur.getLogin());
+        JTmdp.setText(unVisiteur.getMdp());
+        JTadresse.setText(unVisiteur.getAdresse());
+        JTcp.setText(unVisiteur.getUneLocalite().getCodePostal());
+        JTdateEntree.setText(unVisiteur.getDateEntree());
+        JCCodeUnite.setSelectedItem(unVisiteur.getCodeUnite());
+    }
+
     public Localite testLocalite() {
         Localite laLocalite = null;
         try {
