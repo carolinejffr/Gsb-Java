@@ -50,6 +50,19 @@ public class ValidationUtils {
     	return resultat;
     }
     
+	public static boolean isDateHourValide(String uneDateHeure) {
+		boolean resultat = false;
+    	 try {
+			 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss' '");
+    		 sdf.setLenient(false);
+    		 sdf.parse(uneDateHeure);
+    		 resultat = true;
+    		 } catch (Exception e) {
+    			 resultat = false;
+    		 }
+    	return resultat;
+	}
+
     public boolean estUnEntier(String chaine) {
 		try {
 			Integer.parseInt(chaine);

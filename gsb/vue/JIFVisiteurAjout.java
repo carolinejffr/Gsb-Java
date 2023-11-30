@@ -48,36 +48,46 @@ public class JIFVisiteurAjout extends JIFVisiteur implements ActionListener {
     public void actionPerformed(ActionEvent evenement) 
     { 
         
-            Object source = evenement.getSource();
-            if (source == Vider)
-            {
-                viderText();
-            }
-            else if (source == Valider){
-                boolean verification = true;
-                //verification = verifChamps();
+        Object source = evenement.getSource();
+        if (source == Vider)
+        {
+            viderText();
+        }
+        else if (source == Valider){
+            boolean verification = true;
+            //verification = verifChamps();
 
-                if (verification == true){
-                    int codeRequete = ajoutVisiteurBDD();
-                    if (codeRequete == 0){
-                        Localite laLocalite = testLocalite();
-                        System.out.println("dans Verification : "+laLocalite);
-                        if (laLocalite == null){
-                            labelErreur.setText("<html>Le code postal indiquée n'existe pas dans la base de données.<br/>Veuillez l'ajouter avant de réessayer.</html>");
-                            verification = false;
-                        }
-                        else if (verifMatricule()) {
-                            labelErreur.setText("<html>le Matricule existe déja </html>");
-                        }
-                        else{
-                            //if( testLongueur() == true){}  
-                            labelErreur.setText("<html>Erreur à implémenter </html>");
-                            }
+            if (verification == true){
+                int codeRequete = ajoutVisiteurBDD();
+                if (codeRequete == 0){
+                    Localite laLocalite = testLocalite();
+                    String longeur = testLongueur();
+                    //TODO A FAIRE PLUS TARD
 
-                        }
+                    System.out.println("dans Verification : "+laLocalite);
+                    if (laLocalite == null){
+                        labelErreur.setText("<html>Le code postal indiquée n'existe pas dans la base de données.<br/>Veuillez l'ajouter avant de réessayer.</html>");
+                        verification = false;
                     }
+                    else if(longeur != null){
+                        labelErreur.setText("<html>"+longeur+" est bien trop long voyons</html>");
+                    }
+                    else if (verifMatricule()) {
+                        labelErreur.setText("<html> Le Matricule existe déja </html>");
+                    }
+                    //else if(verifDateHeure()){
+                        //labelErreur.setText("<html> L'heure n'est pas valide </html>");
+                    }
+                    else{
+                        //if( testLongueur() == true){}  
+                        labelErreur.setText("<html> Erreur à implémenter </html>");
+                    }
+                    
+                }
+                else{
+                      labelErreur.setText("<html> Injection reussi </html>");  
                 }
             }
-    
+        }
     }
 
