@@ -1,5 +1,5 @@
 /*
- * Cr�� le 29 oct. 2014
+ * Créé le 29 oct. 2014
  *
  */
 package gsb.utils;
@@ -25,7 +25,7 @@ public class ValidationUtils {
     }
 
     public static boolean isTelephoneValide(String telephone) {
-    	// num�ro de t�l�phone sous la forme XXXXXXXXXX ou XX XX XX XX XX ou XX-XX-XX-XX-XX ou XX.XX.XX.XX.XX
+    	// numéro de téléphone sous la forme XXXXXXXXXX ou XX XX XX XX XX ou XX-XX-XX-XX-XX ou XX.XX.XX.XX.XX
     	Pattern p = Pattern.compile("^0[1-9]([-. ]?[0-9]{2}){4}$");
     	Matcher m = p.matcher(telephone.toUpperCase());
     	return m.matches();
@@ -50,6 +50,19 @@ public class ValidationUtils {
     	return resultat;
     }
     
+	public static boolean isDateHourValide(String uneDateHeure) {
+		boolean resultat = false;
+    	 try {
+			 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss' '");
+    		 sdf.setLenient(false);
+    		 sdf.parse(uneDateHeure);
+    		 resultat = true;
+    		 } catch (Exception e) {
+    			 resultat = false;
+    		 }
+    	return resultat;
+	}
+
     public boolean estUnEntier(String chaine) {
 		try {
 			Integer.parseInt(chaine);

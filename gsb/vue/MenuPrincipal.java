@@ -155,8 +155,13 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			else if (ChoixOption.equals("Stock Echantillons Visiteur")) 
 			{
 				ouvrirFenetre(new JIFStockVisiteur());
+			}			
+			else if (ChoixOption.equals("Ajout Visiteur")) 
+			{
+				//Léo
+				ouvrirFenetre(new JIFVisiteurAjout());
 			}
-      else if (ChoixOption.equals("Mise a jour Visite")) 
+      		else if (ChoixOption.equals("Mise a jour Visite")) 
 			{
 				ouvrirFenetre(new JIFVisiteModif());
 			}
