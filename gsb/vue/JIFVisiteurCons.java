@@ -16,8 +16,8 @@ import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
 /**
- * @author Isabelle
- * 17 nov. 2014
+ * @author Tallec--Éven Léo
+ * 30 nov. 2023
  */
 public class JIFVisiteurCons extends JIFVisiteur  implements ActionListener {
 	

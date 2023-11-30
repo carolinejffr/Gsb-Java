@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import gsb.modele.Localite;
-import gsb.modele.Medecin;
 import gsb.modele.Visiteur;
 /*
  * @author Caroline Jaffré

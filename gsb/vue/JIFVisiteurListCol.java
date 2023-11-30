@@ -1,5 +1,5 @@
 /*
- * Créé le 3 mars 2015
+ * Créé le 30 novembre 2023
  *
  */
 package gsb.vue;
@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 
 /**
  * @author Tallec--Éven Léo
- * 3 mars 2015
+ * 30 novembre 2023
  */
 public class JIFVisiteurListCol extends JInternalFrame implements ActionListener {
 
