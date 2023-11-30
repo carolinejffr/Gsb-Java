@@ -60,7 +60,6 @@ public class JIFVisiteurAjout extends JIFVisiteur implements ActionListener {
                 if (codeRequete == 0){
                     Localite laLocalite = testLocalite();
                     String longeur = testLongueur();
-                    //TODO A FAIRE PLUS TARD
 
                     System.out.println("dans Verification : "+laLocalite);
                     if (laLocalite == null){

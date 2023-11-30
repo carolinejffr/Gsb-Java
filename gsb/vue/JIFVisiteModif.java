@@ -74,9 +74,9 @@ public class JIFVisiteModif extends JInternalFrame implements ActionListener
 
 
         ArrayList<String> references = MedicamentService.getListeMedicaments();
-        for (String referene : references)
+        for (String reference : references)
         {
-            JCMatricule.addItem(referene);
+            JCReference.addItem(reference);
         }
         ArrayList<String> matricules = VisiteurService.listeMatricules();
         for (String matricule : matricules)

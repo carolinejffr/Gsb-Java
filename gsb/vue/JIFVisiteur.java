@@ -1,7 +1,5 @@
 /*
 * Créé le 22 mars 2012
-*
-* TODO Pour changer le modèle de ce fichier généré, allez à :
 * Fenêtre - Préférences - Java - Style de code - Modèles de code
 */
 package gsb.vue;
@@ -168,8 +166,6 @@ public class JIFVisiteur extends JInternalFrame {
         try {
             if (ValidationUtils.isCodePostalValide(JTcp.getText())) {
                 laLocalite = LocaliteDao.rechercher(JTcp.getText());
-                // TODO Supprimer avant envoie
-                System.out.println("dans testLocalite " + laLocalite);
             } else {
                 laLocalite = null;
             }
