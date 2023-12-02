@@ -32,5 +32,17 @@ public class MedecinService {
     public static ArrayList<Medecin> retournerCollectionDesMedecins() {
         return MedecinDao.retournerCollectionDesMedecins();
     }
+
+	public static ArrayList<String> listeCodesMedecin()
+	{
+		ArrayList<String> lesCodes = new ArrayList<String>();
+
+		ArrayList<Medecin> lesMedecins = MedecinDao.retournerCollectionDesMedecins();
+		for (int i = 0; i < lesMedecins.size(); i++)
+		{
+			lesCodes.add(lesMedecins.get(i).getCodeMed());
+		}
+		return lesCodes;
+	}
 	
 }

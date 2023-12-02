@@ -155,8 +155,24 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			else if (ChoixOption.equals("Stock Echantillons Visiteur")) 
 			{
 				ouvrirFenetre(new JIFStockVisiteur());
+			}			
+			else if (ChoixOption.equals("Ajout Visiteur")) 
+			{
+				//Léo
+				ouvrirFenetre(new JIFVisiteurAjout());
 			}
-      		else if (ChoixOption.equals("Mise a jour Visite")) 
+			else if (ChoixOption.equals("Liste Visiteurs"))
+			{
+				//Léo
+				ouvrirFenetre(new JIFVisiteurListDic(this));
+			}
+			else if (ChoixOption.equals("Fiche Visiteur"))
+			{
+				//Léo
+				ouvrirFenetre(new JIFVisiteurCons());
+			}
+
+      else if (ChoixOption.equals("Mise a jour Visite")) 
 			{
 				ouvrirFenetre(new JIFVisiteModif());
 			}
@@ -170,7 +186,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			else if(ChoixOption.equals("Consultation Visite"))
 			{
 				ouvrirFenetre(new JIFVisiteConsultation());
-      		}
+      }
 			
 		}
 
