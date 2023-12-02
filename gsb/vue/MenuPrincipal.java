@@ -49,7 +49,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		myJInternalFrame = new JInternalFrame(); // pour affichage d'une seule
 													// JInternalFrame à la fois
 		desktopPane = new JDesktopPane();
-		desktopPane.setBackground(Color.gray);
+		desktopPane.setBackground(Color.PINK);
 		JPanel contentPane = (JPanel) this.getContentPane();
 		contentPane.add(desktopPane, BorderLayout.CENTER);
 
@@ -79,7 +79,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 
 		mVisites = new JMenu("Visites");
 		JMenuItem mA1 = new JMenuItem("Consultation Visite");
-		mE1.addActionListener(this); // installation d'un écouteur d'action
+		mA1.addActionListener(this); // installation d'un écouteur d'action
 		mVisites.add(mA1);
 		JMenuItem mA2 = new JMenuItem("Ajout Visite");
 		mA2.addActionListener(this);
@@ -156,7 +156,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			{
 				ouvrirFenetre(new JIFStockVisiteur());
 			}
-      else if (ChoixOption.equals("Mise a jour Visite")) 
+      		else if (ChoixOption.equals("Mise a jour Visite")) 
 			{
 				ouvrirFenetre(new JIFVisiteModif());
 			}
@@ -169,8 +169,8 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			}
 			else if(ChoixOption.equals("Consultation Visite"))
 			{
-				//ouvrirFenetre(new JIFVisiteConsultation());
-      }
+				ouvrirFenetre(new JIFVisiteConsultation());
+      		}
 			
 		}
 

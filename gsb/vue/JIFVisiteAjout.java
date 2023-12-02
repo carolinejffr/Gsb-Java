@@ -171,5 +171,8 @@ public class JIFVisiteAjout extends JInternalFrame implements ActionListener
 			JCCodeMedecin.setSelectedIndex(0);
 		}
 	}
-	
+
+	protected void verifierChamps() {
+		
+	}
 }
