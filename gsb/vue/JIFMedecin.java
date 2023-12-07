@@ -131,7 +131,7 @@ public class JIFMedecin extends JInternalFrame  {
         JTpotentiel.setText(unMedecin.getPotentiel());
         JTspecialite.setText(unMedecin.getSpecialite());
      }
-     
+
       public void viderText() 	
     {  // méthode qui permet de vider les zones de texte 
         JTcode.setText("");        

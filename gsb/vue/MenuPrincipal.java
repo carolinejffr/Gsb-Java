@@ -79,6 +79,12 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		JMenuItem mE2 = new JMenuItem("Ajout Medicaments");
 		mE2.addActionListener(this);
 		mMedicaments.add(mE2);
+		JMenuItem mE3 = new JMenuItem("Liste Medicament");
+		mE3.addActionListener(this); // installation d'un écouteur d'action
+		mMedicaments.add(mE3);
+		JMenuItem mE4 = new JMenuItem("Famille Medicament");
+		mE4.addActionListener(this); // installation d'un écouteur d'action
+		mMedicaments.add(mE4);
 
 		mVisites = new JMenu("Visites");
 		JMenuItem mA1 = new JMenuItem("Consultation Visite");
@@ -156,6 +162,24 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			{
 				ouvrirFenetre(new JIFStockVisiteur());
 			}
+
+			// Ajouts perso -Thomas
+			else if (ChoixOption.equals("Consultation Medicament")) 
+			{
+				ouvrirFenetre(new JIFMedicamentConsultation());
+			}
+			/*else if (ChoixOption.equals("Ajout Medicaments")) 
+			{
+				ouvrirFenetre(new JIFMedicamentAjout());
+			}
+			else if (ChoixOption.equals("Liste Medicament")) 
+			{
+				ouvrirFenetre(new JIFMedicamentListe());
+			}
+			else if (ChoixOption.equals("Famille Medicament")) 
+			{
+				ouvrirFenetre(new JIFMedicamentFamille());
+			}*/
 		}
 
 	}
