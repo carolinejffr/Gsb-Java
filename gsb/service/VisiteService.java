@@ -16,7 +16,7 @@ public class VisiteService {
      *
      * @return         	La liste des visiteurs
      */
-    public static ArrayList<Visite> getListeVisiteurs() {
+    public static ArrayList<Visite> getListeVisites() {
         ArrayList<Visite> laListe = new ArrayList<Visite>();
         try
         {

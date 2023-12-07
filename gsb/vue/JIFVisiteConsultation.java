@@ -10,6 +10,7 @@ import gsb.modele.Visite;
 import gsb.service.VisiteService;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
