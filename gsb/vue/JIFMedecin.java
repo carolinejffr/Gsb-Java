@@ -1,8 +1,6 @@
 /*
  * Créé le 22 mars 2012
  *
- * TODO Pour changer le modèle de ce fichier généré, allez à :
- * Fenêtre - Préférences - Java - Style de code - Modèles de code
  */
 package gsb.vue;
 

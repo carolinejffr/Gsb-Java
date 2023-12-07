@@ -1,11 +1,11 @@
 /*
- * Créé le 3 mars 2015
+ * Créé le 30 novembre 2023
  *
  */
 package gsb.vue;
 
-import gsb.modele.Medecin;
-import gsb.modele.dao.MedecinDao;
+import gsb.modele.Visiteur;
+import gsb.modele.dao.VisiteurDao;
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -22,30 +22,30 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
- * @author Isabelle
- * 3 mars 2015
+ * @author Tallec--Éven Léo
+ * 30 novembre 2023
  */
-public class JIFMedecinListeCol extends JInternalFrame implements ActionListener {
+public class JIFVisiteurListCol extends JInternalFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 
-	private ArrayList<Medecin> lesMedecins;
+	private ArrayList<Visiteur> lesVisiteurs;
 
 
 	protected JPanel p;
 	protected JScrollPane scrollPane;
 	protected JPanel pSaisie;
-	protected JTextField JTcodeMedecin;
+	protected JTextField JTcodeVisiteur;
 	protected JButton JBafficherFiche;
 	protected MenuPrincipal fenetreContainer;
 
-	public JIFMedecinListeCol(MenuPrincipal uneFenetreContainer) {
+	public JIFVisiteurListCol(MenuPrincipal uneFenetreContainer) {
 
 		fenetreContainer = uneFenetreContainer;
-		// récupération des données Medecin dans la collection
-		lesMedecins = MedecinDao.retournerCollectionDesMedecins();
+		// récupération des données Visiteur dans la collection
+		lesVisiteurs = VisiteurDao.retournerCollectionDesVisiteurs();
 
-		int nbLignes = lesMedecins.size();
+		int nbLignes = lesVisiteurs.size();
 
 		JTable table;
 		
@@ -55,11 +55,11 @@ public class JIFMedecinListeCol extends JInternalFrame implements ActionListener
 
 		int i=0;
 		String[][] data = new String[nbLignes][4] ;
-		for(Medecin unMedecin : lesMedecins){
-			data[i][0] = unMedecin.getCodeMed();
-			data[i][1] = unMedecin.getNom();
-			data[i][2] = unMedecin.getPrenom();
-			data[i][3] = unMedecin.getLaLocalite().getVille() ;
+		for(Visiteur unVisiteur : lesVisiteurs){
+			data[i][0] = unVisiteur.getMatricule();
+			data[i][1] = unVisiteur.getNom();
+			data[i][2] = unVisiteur.getPrenom();
+			data[i][3] = unVisiteur.getUneLocalite().getVille() ;
 			i++;
 			}
 		String[] columnNames = {"Code", "Nom","Prenom","Ville"};
@@ -70,11 +70,11 @@ public class JIFMedecinListeCol extends JInternalFrame implements ActionListener
 		p.add(scrollPane);
 		
 		pSaisie = new JPanel();
-		JTcodeMedecin = new JTextField(20);
-		JTcodeMedecin.setMaximumSize(JTcodeMedecin.getPreferredSize());
+		JTcodeVisiteur = new JTextField(20);
+		JTcodeVisiteur.setMaximumSize(JTcodeVisiteur.getPreferredSize());
 		JBafficherFiche = new JButton("Afficher Fiche médecin");
 		JBafficherFiche.addActionListener(this);
-		pSaisie.add(JTcodeMedecin);
+		pSaisie.add(JTcodeVisiteur);
 		pSaisie.add(JBafficherFiche);
 		p.add(pSaisie);
 		
@@ -90,9 +90,9 @@ public class JIFMedecinListeCol extends JInternalFrame implements ActionListener
 	public void actionPerformed(ActionEvent arg0) {
 		Object source = arg0.getSource();
    		if (source == JBafficherFiche){
-   			Medecin unMedecin = MedecinDao.rechercher(JTcodeMedecin.getText());
-   			if (unMedecin!=null){
-   	   			fenetreContainer.ouvrirFenetre(new JIFMedecinFiche(unMedecin));
+   			Visiteur unVisiteur = VisiteurDao.rechercher(JTcodeVisiteur.getText());
+   			if (unVisiteur!=null){
+   	   			fenetreContainer.ouvrirFenetre(new JIFVisiteurFiche(unVisiteur));
    			}
    		}	
 	}

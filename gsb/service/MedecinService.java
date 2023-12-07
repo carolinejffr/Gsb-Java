@@ -1,10 +1,10 @@
 /*
  * Créé le 23 févr. 2015
  *
- * TODO Pour changer le modèle de ce fichier généré, allez à :
- * Fenêtre - Préférences - Java - Style de code - Modèles de code
  */
 package gsb.service;
+
+import java.util.ArrayList;
 
 import gsb.modele.Medecin;
 import gsb.modele.dao.MedecinDao;
@@ -12,8 +12,6 @@ import gsb.modele.dao.MedecinDao;
 /**
  * @author Isabelle
  * 23 févr. 2015
- * TODO Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre - Préférences - Java - Style de code - Modèles de code
  */
 public class MedecinService {
 	
@@ -29,6 +27,22 @@ public class MedecinService {
 			System.out.println( e.getMessage());
 		}
 		return unMedecin;
+	}
+
+    public static ArrayList<Medecin> retournerCollectionDesMedecins() {
+        return MedecinDao.retournerCollectionDesMedecins();
+    }
+
+	public static ArrayList<String> listeCodesMedecin()
+	{
+		ArrayList<String> lesCodes = new ArrayList<String>();
+
+		ArrayList<Medecin> lesMedecins = MedecinDao.retournerCollectionDesMedecins();
+		for (int i = 0; i < lesMedecins.size(); i++)
+		{
+			lesCodes.add(lesMedecins.get(i).getCodeMed());
+		}
+		return lesCodes;
 	}
 	
 }
