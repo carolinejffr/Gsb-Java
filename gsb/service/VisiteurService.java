@@ -1,7 +1,6 @@
 package gsb.service;
 
 import java.util.ArrayList;
-
 import gsb.modele.Visiteur;
 import gsb.modele.dao.VisiteurDao;
 /*
@@ -29,4 +28,16 @@ public class VisiteurService
     public static Visiteur rechercher(String unMatricule) {
         return VisiteurDao.rechercher(unMatricule);
     }
+
+    public static ArrayList<String> listeMatricules()
+	{
+		ArrayList<String> lesMatricules = new ArrayList<String>();
+
+		ArrayList<Visiteur> lesVisiteurs = VisiteurDao.retournerCollectionDesVisiteurs();
+		for (int i = 0; i < lesVisiteurs.size(); i++)
+		{
+			lesMatricules.add(lesVisiteurs.get(i).getMatricule());
+		}
+		return lesMatricules;
+	}
 }
