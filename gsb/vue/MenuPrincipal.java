@@ -49,7 +49,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		myJInternalFrame = new JInternalFrame(); // pour affichage d'une seule
 													// JInternalFrame à la fois
 		desktopPane = new JDesktopPane();
-		desktopPane.setBackground(Color.PINK);
+		desktopPane.setBackground(new Color(120, 196, 134));
 		JPanel contentPane = (JPanel) this.getContentPane();
 		contentPane.add(desktopPane, BorderLayout.CENTER);
 
