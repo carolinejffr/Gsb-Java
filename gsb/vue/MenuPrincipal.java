@@ -193,7 +193,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			{
 				ouvrirFenetre(new JIFMedicamentFamille());
 			}*/
-      else if (ChoixOption.equals("Mise a jour Visite")) 
+      			else if (ChoixOption.equals("Mise a jour Visite")) 
 			{
 				ouvrirFenetre(new JIFVisiteModif());
 			}
@@ -207,7 +207,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			else if(ChoixOption.equals("Consultation Visite"))
 			{
 				ouvrirFenetre(new JIFVisiteConsultation());
-      }
+      			}
 		}
 
 	}
@@ -220,8 +220,6 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		myJInternalFrame.setResizable(true);
 		myJInternalFrame.setMaximizable(true);
 		myJInternalFrame.setClosable(true);
-		// Ajustements pour que la fenêtre s'ouvre de la bonne taille directement, à tester sur MAC
-		// Supprime les deux lignes lors de la vérif 👍
 		myJInternalFrame.setSize(485, 340);
 		desktopPane.add(myJInternalFrame);
 	}
