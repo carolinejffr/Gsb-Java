@@ -10,7 +10,6 @@ import gsb.modele.Visite;
 import gsb.service.VisiteService;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,8 +30,7 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 	// Panels
 	protected JPanel p, 
 			   pChamps,
-			  pBoutons,
-			   pErreur;
+			  pBoutons;
 
 	// Labels
 	protected JLabel JLreference,
@@ -53,7 +51,8 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 	protected JButton JBPremier,
 						JBPrecedent,
 						JBSuivant,
-						JBDernier;
+						JBDernier,
+						JBSupprimer;
 
 	// Liste de données
 	protected ArrayList<Visite> visites;
@@ -62,7 +61,7 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 	public JIFVisiteConsultation()
 	{
 		// Panels
-		p = new JPanel(new GridLayout(2, 1));  		// panneau principal de la fenêtre
+		p = new JPanel();  		// panneau principal de la fenêtre
 		pChamps = new JPanel(new GridLayout(5, 2));	// panneau des champs
 		pBoutons = new JPanel();	// panneau des boutons
 		
@@ -74,8 +73,8 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 		JLMedecin = new JLabel("Code Medecin");
 
 		// Champs
-		JTReference = new JTextField();
-		JTDate = new JTextField();
+		JTReference = new JTextField(20);
+		JTDate = new JTextField(20);
 		JTMatricule = new JTextField();
 		JTCodeMedecin = new JTextField();
 		JTCommentaire = new JTextArea();
@@ -94,6 +93,7 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 		JBPrecedent = new JButton("Précédent");
 		JBSuivant = new JButton("Suivant");
 		JBDernier = new JButton("Dernier");
+		JBSupprimer = new JButton("Supprimer");
 
 		// Ajout des composants au panneau principal
 		pChamps.add(JLreference);
@@ -126,18 +126,20 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 		// Ajout du panneau principal dans la fenêtre
 		p.add(pChamps);
 		p.add(pBoutons);
+		p.add(JBSupprimer);
 
 		Container contentPane = getContentPane();
         contentPane.add(p);
 
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setTitle("Ajout Visite");
+		setTitle("Consultation Visite");
 
 		// Ecouteurs d'évènements
 		JBPremier.addActionListener(this);
 		JBPrecedent.addActionListener(this);
 		JBSuivant.addActionListener(this);
 		JBDernier.addActionListener(this);
+		JBSupprimer.addActionListener(this);
 
 		addInternalFrameListener(new InternalFrameAdapter() {
 			/**
@@ -193,9 +195,32 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 					"Impossible d'afficher la page suivante",
 					JOptionPane.INFORMATION_MESSAGE,
 					null
-					);
+				);
 			} else if(source == JBDernier) {
 				pointeur = visites.size() - 1;
+			} else if(source == JBSupprimer) {
+				int result = JOptionPane.showConfirmDialog(
+					null,
+					"Voulez-vous supprimer cette visite ?",
+					"Suppression",
+					JOptionPane.YES_NO_OPTION
+				);
+
+				if(result == JOptionPane.OK_OPTION) {
+					VisiteService.supprimer(visites.get(pointeur));
+					visites = VisiteService.getListeVisites();
+					if(visites.size() > 0) {
+						pointeur = 0;
+						remplir();
+					}
+					else JOptionPane.showMessageDialog(
+						p,
+						"Aucune donnée n'a été trouvée.\nVeuillez d'abord ajouter une visite.",
+						"Impossible d'afficher la page",
+						JOptionPane.INFORMATION_MESSAGE,
+						null
+						);
+				}
 			}
 
 			remplir();

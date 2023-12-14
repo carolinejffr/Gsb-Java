@@ -51,4 +51,8 @@ public class VisiteService {
     public static Visite rechercherVisite(String reference) {
         return VisiteDao.rechercher(reference);
     }
+
+    public static int supprimer(Visite uneVisite) {
+        return VisiteDao.supprimer(uneVisite.getReference());
+    }
 }
