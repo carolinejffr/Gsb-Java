@@ -75,6 +75,7 @@ public class VisiteDao {
      * @return            0 => Erreur, 1 => OK
      */
     public static int ajouter(Visite uneVisite) {
+
         int retour = ConnexionMySql.execReqMaj(
             "INSERT INTO Visite VALUES ('" +
             uneVisite.getReference() +"', '" +

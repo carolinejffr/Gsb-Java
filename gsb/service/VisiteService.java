@@ -14,7 +14,7 @@ public class VisiteService {
     /**
      * Renvoie la liste des visiteurs de la base
      *
-     * @return         	La liste des visiteurs
+     * @return La liste des visiteurs
      */
     public static ArrayList<Visite> getListeVisites() {
         ArrayList<Visite> laListe = new ArrayList<Visite>();
@@ -39,6 +39,7 @@ public class VisiteService {
      * @return            0 => Erreur, 1 => OK
      */
     public static int ajouter(Visite uneVisite) {
+        if(uneVisite == null) throw new NullPointerException("La visite à ajouter ne doit pas être null.");
         return VisiteDao.ajouter(uneVisite);
     }
 
@@ -49,10 +50,12 @@ public class VisiteService {
      * @return              null => Pas trouvé, une visite => OK
      */
     public static Visite rechercherVisite(String reference) {
+        if(reference == null) throw new NullPointerException("La référence de la visite à rechercher ne doit pas être null.");
         return VisiteDao.rechercher(reference);
     }
 
     public static int supprimer(Visite uneVisite) {
+        if(uneVisite == null) throw new NullPointerException("La visite à supprimer ne doit pas être null.");
         return VisiteDao.supprimer(uneVisite.getReference());
     }
 }
