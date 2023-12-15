@@ -106,6 +106,22 @@ public class VisiteDao {
            e.printStackTrace();
            System.out.println("Erreur : retournerLesVisites()");
         }
+        
+        ConnexionMySql.fermerConnexionBd();
         return lesVisites;
+    }
+
+    public static int supprimer(String reference) {
+        int result;
+        try {
+            result = ConnexionMySql.execReqMaj("DELETE FROM Visite WHERE REFERENCE = '" + reference + "'");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Erreur : supprimer()");
+            result = 0;
+        }
+
+        ConnexionMySql.fermerConnexionBd();
+        return result;
     }
 }

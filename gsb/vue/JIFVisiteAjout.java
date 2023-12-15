@@ -11,16 +11,19 @@ import gsb.modele.Visite;
 import gsb.service.MedecinService;
 import gsb.service.VisiteService;
 import gsb.service.VisiteurService;
+import gsb.utils.ValidationUtils;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+
 import javax.swing.JTextArea;
 
 /**
@@ -59,7 +62,7 @@ public class JIFVisiteAjout extends JInternalFrame implements ActionListener
 	public JIFVisiteAjout()
 	{
 		// Panels
-		p = new JPanel(new GridLayout(2, 1));  		// panneau principal de la fenêtre
+		p = new JPanel();  		// panneau principal de la fenêtre
 		pChamps = new JPanel(new GridLayout(5, 2));	// panneau des champs
 		pBoutons = new JPanel();	// panneau des boutons
 		
@@ -71,8 +74,8 @@ public class JIFVisiteAjout extends JInternalFrame implements ActionListener
 		JLMedecin = new JLabel("Code Medecin");
 
 		// Champs
-		JTReference = new JTextField();
-		JTDate = new JTextField();
+		JTReference = new JTextField(20);
+		JTDate = new JTextField(20);
 		JTCommentaire = new JTextArea();
 		JTCommentaire.setLineWrap(true);
 		JTCommentaire.setWrapStyleWord(true);
@@ -160,19 +163,82 @@ public class JIFVisiteAjout extends JInternalFrame implements ActionListener
 				MedecinService.rechercherMedecin(JCCodeMedecin.getSelectedItem().toString()),
 				VisiteurService.rechercher(JCMatricule.getSelectedItem().toString())
 			);
-			
-			VisiteService.ajouter(uneVisite);
-		} else if(source == JBVider) {
-			JTReference.setText("");
-			JTDate.setText("");
-			JTCommentaire.setText("");
 
-			JCMatricule.setSelectedIndex(0);
-			JCCodeMedecin.setSelectedIndex(0);
+			if(visiteValide(uneVisite)) {
+				VisiteService.ajouter(uneVisite);
+
+				JOptionPane.showMessageDialog(
+					null,
+					"Visite ajoutée avec succès",
+					"Visite ajoutée",
+					JOptionPane.INFORMATION_MESSAGE
+				);
+
+				vider();
+			}
+			
+			
+		} else if(source == JBVider) {
+			vider();
 		}
 	}
 
-	protected void verifierChamps() {
-		
+	protected boolean visiteValide(Visite uneVisite) {
+		boolean JTReferenceValide = testerLongueur(uneVisite.getReference(), 1, 5);
+		boolean JTDateValide = ValidationUtils.isDateValide(uneVisite.getDate());
+		boolean JTCommentaireValide = testerLongueur(uneVisite.getCommentaire(), 0, 100);
+		boolean JTMatriculeValide = testerLongueur(uneVisite.getUnVisiteur().getMatricule(), 1, 4);
+		boolean JTCodeMedecinValide = testerLongueur(uneVisite.getUnMedecin().getCodeMed(), 1, 4);
+
+		if(!JTReferenceValide) {
+			JOptionPane.showMessageDialog(
+				null,
+				"La référence doit avoir une longueur comprise entre 1 et 5 caractères",
+				"Erreur dans la saisie",
+				JOptionPane.ERROR_MESSAGE
+				);
+		} else if(!JTDateValide) {
+			JOptionPane.showMessageDialog(
+				null,
+				"La date doit être au format JJ/MM/AAAA",
+				"Erreur dans la saisie",
+				JOptionPane.ERROR_MESSAGE
+				);
+		} else if(!JTCommentaireValide) {
+			JOptionPane.showMessageDialog(
+				null,
+				"Le commentaire doit avoir une longueur comprise entre 0 et 100 caractères",
+				"Erreur dans la saisie",
+				JOptionPane.ERROR_MESSAGE
+				);
+		} else if(!JTMatriculeValide) {
+			JOptionPane.showMessageDialog(
+				null,
+				"Le matricule doit avoir une longueur comprise entre 1 et 4 caractères",
+				"Erreur dans la saisie",
+				JOptionPane.ERROR_MESSAGE
+			);
+		} else if(!JTCodeMedecinValide) {
+			JOptionPane.showMessageDialog(
+				null,
+				"Le code medecin doit avoir une longueur comprise entre 1 et 4 caractères",
+				"Erreur dans la saisie",
+				JOptionPane.ERROR_MESSAGE
+			);
+		}
+
+		return JTReferenceValide && JTDateValide && JTCommentaireValide && JTMatriculeValide && JTCodeMedecinValide;
+	}
+
+	protected void vider() {
+		JTReference.setText("");
+		JTDate.setText("");
+		JTCommentaire.setText("");
+		JCMatricule.setSelectedIndex(0);
+		JCCodeMedecin.setSelectedIndex(0);
+	}
+
+	protected boolean testerLongueur(String chaine, int min, int max) {
+		return (chaine.length() >= min && chaine.length() <= max);
 	}
 }
