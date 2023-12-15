@@ -95,7 +95,7 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 		JBDernier = new JButton("Dernier");
 		JBSupprimer = new JButton("Supprimer");
 
-		// Ajout des composants au panneau principal
+		// Ajout des composants dans leur panneau
 		pChamps.add(JLreference);
 		pChamps.add(JTReference);
 
@@ -175,10 +175,13 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 	{ 
 		Object source = evt.getSource();
 
+		// On vérifie que la liste n'est pas vide
 		if(visites.size() > 0) {
-			if(source == JBPremier) {
+			if(source == JBPremier) { // Bouton Premier cliqué
+				// On remet le pointeur à 0 (début de la liste)
 				pointeur = 0;
-			} else if(source == JBPrecedent) {
+			} else if(source == JBPrecedent) { // Bouton Précédent cliqué
+				// On vérifie que le pointeur n'est pas au debut puis on le déplace
 				if(pointeur > 0) pointeur--;
 				else JOptionPane.showMessageDialog(
 					p,
@@ -187,7 +190,8 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 					JOptionPane.INFORMATION_MESSAGE,
 					null
 					);
-			} else if(source == JBSuivant) {
+			} else if(source == JBSuivant) { // Bouton Suivant cliqué
+				// On vérifie que le pointeur n'est pas à la fin puis on le déplace
 				if(visites.size() - 1 > pointeur) pointeur++;
 				else JOptionPane.showMessageDialog(
 					p,
@@ -196,9 +200,11 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 					JOptionPane.INFORMATION_MESSAGE,
 					null
 				);
-			} else if(source == JBDernier) {
+			} else if(source == JBDernier) { // Bouton Dernier cliqué
+				// On met le pointeur à la fin de la liste
 				pointeur = visites.size() - 1;
-			} else if(source == JBSupprimer) {
+			} else if(source == JBSupprimer) { // Bouton Supprimer cliqué
+				// On affiche une fenêtre de confirmation pour éviter toute suppression non souhaitée
 				int result = JOptionPane.showConfirmDialog(
 					null,
 					"Voulez-vous supprimer cette visite ?",
@@ -206,11 +212,18 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 					JOptionPane.YES_NO_OPTION
 				);
 
-				if(result == JOptionPane.OK_OPTION) {
+				if(result == JOptionPane.OK_OPTION) { // L'utilisateur confirme la suppression
+					// Suppression de la visite
 					VisiteService.supprimer(visites.get(pointeur));
+
+					// On raffraichit les données
 					visites = VisiteService.getListeVisites();
-					if(visites.size() > 0) {
+
+					if(visites.size() > 0) { // La liste n'est pas vide
+						// On remet le pointeur à 0 (début de la liste)
 						pointeur = 0;
+
+						// On raffraichit les champs de la fenêtre
 						remplir();
 					}
 					else JOptionPane.showMessageDialog(
