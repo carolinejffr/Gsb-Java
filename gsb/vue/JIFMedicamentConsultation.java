@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
@@ -30,7 +29,7 @@ public class JIFMedicamentConsultation extends JIFMedicament  implements ActionL
     private ArrayList<Medicament> lesMedicaments;
 	private int indiceEnCours;
         
-    public JIFMedicamentConsultation() {
+    public JIFMedicamentConsultation(Medicament MedicEnCours) {
         super();
         JPanel consultation = new JPanel();
         premier = new JButton("Premier");
@@ -51,10 +50,19 @@ public class JIFMedicamentConsultation extends JIFMedicament  implements ActionL
         
         // récupération des données Medicament dans la collection
         lesMedicaments = MedicamentDao.retournerCollectionDesMedicaments();
-        indiceEnCours = 0;
+        if (MedicEnCours == null){
+        	indiceEnCours = 0;
+        }
+        else {
+            for (int i = 0; i < lesMedicaments.size(); i++) {
+                if (lesMedicaments.get(i).getDepotLegal().equals(MedicEnCours.getDepotLegal())){
+                    indiceEnCours = i;
+                }
+            }
+        }
         
         if (lesMedicaments.size()!=0){ // si collection non vide, affichage des données du premier Medicament
-        	Medicament leMedicament = lesMedicaments.get(0);
+        	Medicament leMedicament = lesMedicaments.get(indiceEnCours);
 	    	remplirTextMedi(leMedicament);
 	    	}
         

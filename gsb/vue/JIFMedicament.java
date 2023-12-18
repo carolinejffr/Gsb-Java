@@ -4,9 +4,6 @@ import gsb.modele.Medicament;
 import gsb.modele.dao.MedicamentDao;
 import gsb.modele.dao.ConnexionMySql;
 
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import java.awt.Container;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
@@ -14,7 +11,6 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JTextArea;
 
 public class JIFMedicament extends JInternalFrame  {
 	/**
@@ -174,7 +170,7 @@ public class JIFMedicament extends JInternalFrame  {
     * Cette méthode est appellée si VerifChamp est correct, dans JIFMedicamentAjout.
     * Elle récupère toutes les valeurs des champs et envoie la requête SQL d'insertion du médicament
     */
-    public int ajoutMedecinBDD()
+    public int ajoutMedicamentBDD()
     {
         int codeRequete = 0;
         // On commence par récupérer toutes les valeurs

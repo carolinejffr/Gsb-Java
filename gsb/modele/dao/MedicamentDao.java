@@ -34,6 +34,22 @@ public class MedicamentDao {
 		return unMedicament;
 	}
 
+	public static ArrayList<Medicament> retournerMedicamentsParFamille(String codeFamille){
+		ArrayList<Medicament> collectionDesMedicaments = new ArrayList<Medicament>();
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("SELECT MED_DEPOTLEGAL FROM MEDICAMENT where FAM_CODE = '"+codeFamille+"' ORDER BY MEDICAMENT.MED_DEPOTLEGAL ASC");
+		try{
+		while (reqSelection.next()) {
+			String depotLegal = reqSelection.getString(1);
+		    collectionDesMedicaments.add(MedicamentDao.rechercher(depotLegal));
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("erreur retournerCollectionDesMedecins()");
+		}
+		return collectionDesMedicaments;
+	}
+
 	public static ArrayList<Medicament> retournerCollectionDesMedicaments(){
 		ArrayList<Medicament> collectionDesMedicaments = new ArrayList<Medicament>();
 		ResultSet reqSelection = ConnexionMySql.execReqSelection("SELECT `MED_DEPOTLEGAL` FROM `medicament` ORDER BY `medicament`.`MED_DEPOTLEGAL` ASC ");
