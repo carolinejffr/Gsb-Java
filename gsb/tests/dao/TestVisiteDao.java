@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 
-import gsb.modele.Localite;
 import gsb.modele.Medecin;
 import gsb.modele.Visite;
 import gsb.modele.Visiteur;
