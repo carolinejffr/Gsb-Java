@@ -6,7 +6,7 @@ import gsb.modele.Stocker;
 import gsb.modele.dao.ConnexionMySql;
 import gsb.modele.dao.StockDao;
 
-/*
+/**
  * @author Caroline Jaffré
  */
 public class StockService 
