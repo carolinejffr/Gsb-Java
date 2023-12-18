@@ -17,6 +17,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import gsb.modele.Medicament;
+
 /**
  * @author Isabelle 
  * 22 févr. 2015 
@@ -179,32 +181,27 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			// Ajouts perso -Thomas
 			else if (ChoixOption.equals("Consultation Medicament")) 
 			{
-				ouvrirFenetre(new JIFMedicamentConsultation());
+				ouvrirFenetre(new JIFMedicamentConsultation(null));
 			}
-			/*else if (ChoixOption.equals("Ajout Medicaments")) 
+			else if (ChoixOption.equals("Ajout Medicaments")) 
 			{
 				ouvrirFenetre(new JIFMedicamentAjout());
 			}
 			else if (ChoixOption.equals("Liste Medicament")) 
 			{
-				ouvrirFenetre(new JIFMedicamentListe());
+				ouvrirFenetre(new JIFMedicamentListe(this));
 			}
 			else if (ChoixOption.equals("Famille Medicament")) 
 			{
 				ouvrirFenetre(new JIFMedicamentFamille());
-			}*/
-<<<<<<< Updated upstream
-      			else if (ChoixOption.equals("Mise a jour Visite")) 
-			{
-				ouvrirFenetre(new JIFVisiteModif());
 			}
-=======
-    //  else if (ChoixOption.equals("Mise a jour Visite")) 
+      else if (ChoixOption.equals("Mise a jour Visite")) 
+				ouvrirFenetre(new JIFMedicamentFamille(this, null));
+			}
+  //  else if (ChoixOption.equals("Mise a jour Visite")) 
 	//		{
 	//			ouvrirFenetre(new JIFVisiteModif());
 	//		}
->>>>>>> Stashed changes
-      
       
 			// Ajouts perso -Lucas
 			else if(ChoixOption.equals("Ajout Visite"))
