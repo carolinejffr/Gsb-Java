@@ -1,5 +1,6 @@
 package gsb.vue;
 
+<<<<<<< Updated upstream
 import gsb.modele.Medicament;
 import gsb.modele.dao.MedicamentDao;
 import gsb.modele.dao.ConnexionMySql;
@@ -256,3 +257,8 @@ public class JIFMedicament extends JInternalFrame  {
 
     
 }
+=======
+public class JIFMedicament {
+    
+}
+>>>>>>> Stashed changes

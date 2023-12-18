@@ -1,5 +1,9 @@
 package gsb.tests;
 
+<<<<<<< Updated upstream
+=======
+import gsb.utils.sgdb;
+>>>>>>> Stashed changes
 
 public class AffichageVue 
 {
