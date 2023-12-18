@@ -21,7 +21,6 @@ import gsb.service.VisiteurService;
 /*
  * JIFVisiteModif - fenêtre de modification d'une visite
  * @author Caroline Jaffré
- * TODO : Implémentation du tableau
  */
 public class JIFVisiteModif extends JInternalFrame implements ActionListener
 {
