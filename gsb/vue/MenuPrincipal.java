@@ -38,10 +38,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	protected JMenu mVisiteurs;
 	protected JMenu mLocalites;
 	protected JMenu mStock;
-
-
-
-	JMenu mVisites;
+	protected JMenu mVisites;
 
 	/**
 	 * 
@@ -92,9 +89,9 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		JMenuItem mA2 = new JMenuItem("Ajout Visite");
 		mA2.addActionListener(this);
 		mVisites.add(mA2);
-		JMenuItem mA3 = new JMenuItem("Mise a jour Visite");
-		mA3.addActionListener(this);
-		mVisites.add(mA3);
+		// JMenuItem mA3 = new JMenuItem("Mise a jour Visite");
+		// mA3.addActionListener(this);
+		// mVisites.add(mA3);
 
 		mVisiteurs = new JMenu("Visiteurs");
 		JMenuItem mV1 = new JMenuItem("Liste Visiteurs");
@@ -163,7 +160,8 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			else if (ChoixOption.equals("Stock Echantillons Visiteur")) 
 			{
 				ouvrirFenetre(new JIFStockVisiteur());
-			}			
+			}
+      
 			else if (ChoixOption.equals("Ajout Visiteur")) 
 			{
 				//Léo
@@ -179,7 +177,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 				//Léo
 				ouvrirFenetre(new JIFVisiteurCons());
 			}
-
+      
 			// Ajouts perso -Thomas
 			else if (ChoixOption.equals("Consultation Medicament")) 
 			{
@@ -195,24 +193,15 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			}
 			else if (ChoixOption.equals("Famille Medicament")) 
 			{
-<<<<<<< Updated upstream
 				ouvrirFenetre(new JIFMedicamentFamille());
-			}*/
-<<<<<<< Updated upstream
+			}
       else if (ChoixOption.equals("Mise a jour Visite")) 
-=======
-<<<<<<< Updated upstream
-      			else if (ChoixOption.equals("Mise a jour Visite")) 
-=======
 				ouvrirFenetre(new JIFMedicamentFamille(this, null));
 			}
-      else if (ChoixOption.equals("Mise a jour Visite")) 
->>>>>>> Stashed changes
->>>>>>> Stashed changes
-			{
-				ouvrirFenetre(new JIFVisiteModif());
-			}
-      
+  //  else if (ChoixOption.equals("Mise a jour Visite")) 
+	//		{
+	//			ouvrirFenetre(new JIFVisiteModif());
+	//		}
       
 			// Ajouts perso -Lucas
 			else if(ChoixOption.equals("Ajout Visite"))
@@ -222,7 +211,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			else if(ChoixOption.equals("Consultation Visite"))
 			{
 				ouvrirFenetre(new JIFVisiteConsultation());
-      }
+      			}
 		}
 
 	}
@@ -235,7 +224,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		myJInternalFrame.setResizable(true);
 		myJInternalFrame.setMaximizable(true);
 		myJInternalFrame.setClosable(true);
-		myJInternalFrame.setSize(480, 380);
+		myJInternalFrame.setSize(485, 340);
 		desktopPane.add(myJInternalFrame);
 	}
 

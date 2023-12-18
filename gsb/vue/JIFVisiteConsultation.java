@@ -10,7 +10,6 @@ import gsb.modele.Visite;
 import gsb.service.VisiteService;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,8 +30,7 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 	// Panels
 	protected JPanel p, 
 			   pChamps,
-			  pBoutons,
-			   pErreur;
+			  pBoutons;
 
 	// Labels
 	protected JLabel JLreference,
@@ -53,7 +51,8 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 	protected JButton JBPremier,
 						JBPrecedent,
 						JBSuivant,
-						JBDernier;
+						JBDernier,
+						JBSupprimer;
 
 	// Liste de données
 	protected ArrayList<Visite> visites;
@@ -62,7 +61,7 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 	public JIFVisiteConsultation()
 	{
 		// Panels
-		p = new JPanel(new GridLayout(2, 1));  		// panneau principal de la fenêtre
+		p = new JPanel();  		// panneau principal de la fenêtre
 		pChamps = new JPanel(new GridLayout(5, 2));	// panneau des champs
 		pBoutons = new JPanel();	// panneau des boutons
 		
@@ -74,8 +73,8 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 		JLMedecin = new JLabel("Code Medecin");
 
 		// Champs
-		JTReference = new JTextField();
-		JTDate = new JTextField();
+		JTReference = new JTextField(20);
+		JTDate = new JTextField(20);
 		JTMatricule = new JTextField();
 		JTCodeMedecin = new JTextField();
 		JTCommentaire = new JTextArea();
@@ -94,8 +93,9 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 		JBPrecedent = new JButton("Précédent");
 		JBSuivant = new JButton("Suivant");
 		JBDernier = new JButton("Dernier");
+		JBSupprimer = new JButton("Supprimer");
 
-		// Ajout des composants au panneau principal
+		// Ajout des composants dans leur panneau
 		pChamps.add(JLreference);
 		pChamps.add(JTReference);
 
@@ -126,18 +126,20 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 		// Ajout du panneau principal dans la fenêtre
 		p.add(pChamps);
 		p.add(pBoutons);
+		p.add(JBSupprimer);
 
 		Container contentPane = getContentPane();
         contentPane.add(p);
 
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setTitle("Ajout Visite");
+		setTitle("Consultation Visite");
 
 		// Ecouteurs d'évènements
 		JBPremier.addActionListener(this);
 		JBPrecedent.addActionListener(this);
 		JBSuivant.addActionListener(this);
 		JBDernier.addActionListener(this);
+		JBSupprimer.addActionListener(this);
 
 		addInternalFrameListener(new InternalFrameAdapter() {
 			/**
@@ -173,10 +175,13 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 	{ 
 		Object source = evt.getSource();
 
+		// On vérifie que la liste n'est pas vide
 		if(visites.size() > 0) {
-			if(source == JBPremier) {
+			if(source == JBPremier) { // Bouton Premier cliqué
+				// On remet le pointeur à 0 (début de la liste)
 				pointeur = 0;
-			} else if(source == JBPrecedent) {
+			} else if(source == JBPrecedent) { // Bouton Précédent cliqué
+				// On vérifie que le pointeur n'est pas au debut puis on le déplace
 				if(pointeur > 0) pointeur--;
 				else JOptionPane.showMessageDialog(
 					p,
@@ -185,7 +190,8 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 					JOptionPane.INFORMATION_MESSAGE,
 					null
 					);
-			} else if(source == JBSuivant) {
+			} else if(source == JBSuivant) { // Bouton Suivant cliqué
+				// On vérifie que le pointeur n'est pas à la fin puis on le déplace
 				if(visites.size() - 1 > pointeur) pointeur++;
 				else JOptionPane.showMessageDialog(
 					p,
@@ -193,9 +199,41 @@ public class JIFVisiteConsultation extends JInternalFrame implements ActionListe
 					"Impossible d'afficher la page suivante",
 					JOptionPane.INFORMATION_MESSAGE,
 					null
-					);
-			} else if(source == JBDernier) {
+				);
+			} else if(source == JBDernier) { // Bouton Dernier cliqué
+				// On met le pointeur à la fin de la liste
 				pointeur = visites.size() - 1;
+			} else if(source == JBSupprimer) { // Bouton Supprimer cliqué
+				// On affiche une fenêtre de confirmation pour éviter toute suppression non souhaitée
+				int result = JOptionPane.showConfirmDialog(
+					null,
+					"Voulez-vous supprimer cette visite ?",
+					"Suppression",
+					JOptionPane.YES_NO_OPTION
+				);
+
+				if(result == JOptionPane.OK_OPTION) { // L'utilisateur confirme la suppression
+					// Suppression de la visite
+					VisiteService.supprimer(visites.get(pointeur));
+
+					// On raffraichit les données
+					visites = VisiteService.getListeVisites();
+
+					if(visites.size() > 0) { // La liste n'est pas vide
+						// On remet le pointeur à 0 (début de la liste)
+						pointeur = 0;
+
+						// On raffraichit les champs de la fenêtre
+						remplir();
+					}
+					else JOptionPane.showMessageDialog(
+						p,
+						"Aucune donnée n'a été trouvée.\nVeuillez d'abord ajouter une visite.",
+						"Impossible d'afficher la page",
+						JOptionPane.INFORMATION_MESSAGE,
+						null
+						);
+				}
 			}
 
 			remplir();
