@@ -17,8 +17,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import gsb.modele.Medicament;
-
 /**
  * @author Isabelle 
  * 22 févr. 2015 
@@ -193,15 +191,12 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 			}
 			else if (ChoixOption.equals("Famille Medicament")) 
 			{
-				ouvrirFenetre(new JIFMedicamentFamille());
-			}
-      else if (ChoixOption.equals("Mise a jour Visite")) 
 				ouvrirFenetre(new JIFMedicamentFamille(this, null));
 			}
-  //  else if (ChoixOption.equals("Mise a jour Visite")) 
-	//		{
-	//			ouvrirFenetre(new JIFVisiteModif());
-	//		}
+			//  else if (ChoixOption.equals("Mise a jour Visite")) 
+			//		{
+			//			ouvrirFenetre(new JIFVisiteModif());
+			//		}
       
 			// Ajouts perso -Lucas
 			else if(ChoixOption.equals("Ajout Visite"))

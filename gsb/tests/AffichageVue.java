@@ -1,10 +1,5 @@
 package gsb.tests;
 
-<<<<<<< Updated upstream
-=======
-import gsb.utils.sgdb;
->>>>>>> Stashed changes
-
 public class AffichageVue 
 {
     public static void main(String[] args) 
