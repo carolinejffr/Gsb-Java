@@ -15,7 +15,7 @@ public class StockDao
     public static Stocker rechercher(String matricule, String depotLegal)
     {
         Stocker stock = null;
-        ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from stocker where MATRICULE='"+matricule+"' AND DEPOTLEGAL='" + depotLegal + "'");
+        ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from STOCKER where MATRICULE='"+matricule+"' AND DEPOTLEGAL='" + depotLegal + "'");
 		try {
 			if (reqSelection.next()) 
             {
@@ -26,7 +26,7 @@ public class StockDao
 			};
 			}
 		catch(Exception e) {
-			System.out.println("erreur reqSelection.next() pour la requête - select * from stocker where MATRICULE='"+matricule+"' AND DEPOTLEGAL='" + depotLegal + "'");
+			System.out.println("erreur reqSelection.next() pour la requête - select * from STOCKER where MATRICULE='"+matricule+"' AND DEPOTLEGAL='" + depotLegal + "'");
 			e.printStackTrace();
 			}
 		ConnexionMySql.fermerConnexionBd();
@@ -35,7 +35,7 @@ public class StockDao
 	 public static ArrayList<Stocker> rechercher(String matricule)
 	 {
 		ArrayList<Stocker> listeStock = new ArrayList<Stocker>();
-        ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from stocker where MATRICULE='"+matricule+"'");
+        ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from STOCKER where MATRICULE='"+matricule+"'");
 		try {
 			while (reqSelection.next()) 
             {
@@ -47,7 +47,7 @@ public class StockDao
 			};
 			}
 		catch(Exception e) {
-			System.out.println("erreur reqSelection.next() pour la requête - select * from stocker where MATRICULE='"+matricule+"'");
+			System.out.println("erreur reqSelection.next() pour la requête - select * from STOCKER where MATRICULE='"+matricule+"'");
 			e.printStackTrace();
 			}
 		ConnexionMySql.fermerConnexionBd();

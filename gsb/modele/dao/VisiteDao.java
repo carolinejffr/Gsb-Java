@@ -19,7 +19,7 @@ public class VisiteDao {
      */
     public static Visite rechercher(String reference) {
         Visite visite = null;
-        ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from Visite where REFERENCE ='" + reference + "'");
+        ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from VISITE where REFERENCE ='" + reference + "'");
         
         try {
             if (reqSelection.next()) {
@@ -32,7 +32,7 @@ public class VisiteDao {
                 );
             }
         } catch(Exception e) {
-            System.out.println("erreur reqSelection.next() pour la requête - select * from Visite where REFERENCE ='" + reference + "'");
+            System.out.println("erreur reqSelection.next() pour la requête - select * from VISITE where REFERENCE ='" + reference + "'");
             e.printStackTrace();
         }
         ConnexionMySql.fermerConnexionBd();
@@ -46,7 +46,7 @@ public class VisiteDao {
      */
     public static ArrayList<Visite> retournerCollection() {
         ArrayList<Visite> listeVisite = new ArrayList<Visite>();
-        ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from Visite");
+        ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from VISITE");
 
         try {
             while (reqSelection.next()) {
@@ -61,7 +61,7 @@ public class VisiteDao {
             }
         }
         catch(Exception e) {
-            System.out.println("erreur reqSelection.next() pour la requête - select * from Visite");
+            System.out.println("erreur reqSelection.next() pour la requête - select * from VISITE");
             e.printStackTrace();
         }
         ConnexionMySql.fermerConnexionBd();
@@ -77,7 +77,7 @@ public class VisiteDao {
     public static int ajouter(Visite uneVisite) {
 
         int retour = ConnexionMySql.execReqMaj(
-            "INSERT INTO Visite VALUES ('" +
+            "INSERT INTO VISITE VALUES ('" +
             uneVisite.getReference() +"', '" +
             uneVisite.getDate()+ "', '" +
             uneVisite.getCommentaire() + "', '" +
@@ -115,7 +115,7 @@ public class VisiteDao {
     public static int supprimer(String reference) {
         int result;
         try {
-            result = ConnexionMySql.execReqMaj("DELETE FROM Visite WHERE REFERENCE = '" + reference + "'");
+            result = ConnexionMySql.execReqMaj("DELETE FROM VISITE WHERE REFERENCE = '" + reference + "'");
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Erreur : supprimer()");

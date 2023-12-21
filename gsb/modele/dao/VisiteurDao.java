@@ -15,7 +15,7 @@ public class VisiteurDao {
     public static Visiteur rechercher(String matriculeVisiteur){
 		Visiteur unVisiteur = null;
         Localite uneLocalite= null;
-		ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from Visiteur where MATRICULE ='"+ matriculeVisiteur +"'");
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from VISITEUR where MATRICULE ='"+ matriculeVisiteur +"'");
 		try {
 			if (reqSelection.next()) {
                 uneLocalite = LocaliteDao.rechercher(reqSelection.getString(7));
@@ -25,7 +25,7 @@ public class VisiteurDao {
 			};
 			}
 		catch(Exception e) {
-			System.out.println("erreur reqSelection.next() pour la requête - select * from Visiteur where MATRICULE ='"+ matriculeVisiteur +"'");
+			System.out.println("erreur reqSelection.next() pour la requête - select * from VISITEUR where MATRICULE ='"+ matriculeVisiteur +"'");
 			e.printStackTrace();
 			}
 		ConnexionMySql.fermerConnexionBd();
@@ -34,7 +34,7 @@ public class VisiteurDao {
     public static ArrayList<Visiteur> retournerCollectionDesVisiteurs()
     {
 		ArrayList<Visiteur> collectionDesVisiteurs = new ArrayList<Visiteur>();
-		ResultSet reqSelection = ConnexionMySql.execReqSelection("SELECT `MATRICULE` FROM `Visiteur` ORDER BY `Visiteur`.`MATRICULE` ASC ");
+		ResultSet reqSelection = ConnexionMySql.execReqSelection("SELECT `MATRICULE` FROM `VISITEUR` ORDER BY `VISITEUR`.`MATRICULE` ASC ");
 		try{
 		while (reqSelection.next()) {
 			String matricule = reqSelection.getString(1);
