@@ -41,7 +41,7 @@ public class LocaliteService {
     public static int ajoutLocaliteBDD(String nomVille, String codePostal)
     {
         int codeRequete = 0;
-        int reqMaj = ConnexionMySql.execReqMaj("INSERT INTO `localite` (`CODEPOSTAL`, `VILLE`) VALUES ('" + codePostal + "', '" + nomVille + "') ");
+        int reqMaj = ConnexionMySql.execReqMaj("INSERT INTO `LOCALITE` (`CODEPOSTAL`, `VILLE`) VALUES ('" + codePostal + "', '" + nomVille + "') ");
 
 		ConnexionMySql.fermerConnexionBd();
         if (reqMaj == 1)

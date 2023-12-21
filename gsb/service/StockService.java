@@ -15,7 +15,7 @@ public class StockService
     public static int ajoutStock(int quantite, String matricule, String depotLegal)
     {
         int codeRequete = 0;
-        int reqMaj = ConnexionMySql.execReqMaj("INSERT INTO `stocker` (`QTESTOCK`, `MATRICULE`, `DEPOTLEGAL`) VALUES ('" + quantite + "', '" + matricule + "', '" + depotLegal + "') ");
+        int reqMaj = ConnexionMySql.execReqMaj("INSERT INTO `STOCKER` (`QTESTOCK`, `MATRICULE`, `DEPOTLEGAL`) VALUES ('" + quantite + "', '" + matricule + "', '" + depotLegal + "') ");
 
 		ConnexionMySql.fermerConnexionBd();
         if (reqMaj == 1)
@@ -38,7 +38,7 @@ public class StockService
     public static int updateStock(Stocker unStock)
     {
         int codeRequete = 0;
-        int reqMaj = ConnexionMySql.execReqMaj("UPDATE stocker SET QTESTOCK = " + unStock.getQteStock() + " WHERE MATRICULE ='" + unStock.getUnVisiteur().getMatricule() +"' AND DEPOTLEGAL = '" + unStock.getUnMedicament().getDepotLegal() + "'");
+        int reqMaj = ConnexionMySql.execReqMaj("UPDATE STOCKER SET QTESTOCK = " + unStock.getQteStock() + " WHERE MATRICULE ='" + unStock.getUnVisiteur().getMatricule() +"' AND DEPOTLEGAL = '" + unStock.getUnMedicament().getDepotLegal() + "'");
         ConnexionMySql.fermerConnexionBd();
         if (reqMaj == 1)
         {
