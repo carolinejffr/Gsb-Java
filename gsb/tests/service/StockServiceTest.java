@@ -1,6 +1,5 @@
 package gsb.tests.service;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 
@@ -22,8 +21,12 @@ public class StockServiceTest extends TestCase
     public void beforeStock()
     {
         Localite localiteTest = new Localite("99999", "Test");
-        Visiteur visiteurTest = new Visiteur("A999", "TEST", "test", "test", "test", "adresseTest", localiteTest, "9999999999", "dateTest", 0, "999", "test");
-        Medicament medicamentTest = new Medicament("ZZZ", "test", "test", "test", "test", 1, "test", "test");
+        Visiteur visiteurTest = new Visiteur("A999", "TEST", "test",
+         "test", "test", "adresseTest", localiteTest, "9999999999", 
+         "dateTest", 0, "999", "test");
+        Medicament medicamentTest = new Medicament("ZZZ", "test", 
+        "test", "test", "test", 1, 
+        "test", "test");
         stockTest = new Stocker(1, visiteurTest, medicamentTest);
     }
 
